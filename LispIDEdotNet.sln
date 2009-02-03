@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LispIDEdotNet", "LispIDEdotNet\LispIDEdotNet.csproj", "{C1AE1FEE-7C3F-4CB6-95F6-32F95BDFEFEF}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LispIDEdotNetSetupx86", "LispIDEdotNetSetup\LispIDEdotNetSetup.vdproj", "{7EF3AFB2-A645-4FBD-B8A1-D68630FDD729}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1AE1FEE-7C3F-4CB6-95F6-32F95BDFEFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1AE1FEE-7C3F-4CB6-95F6-32F95BDFEFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1AE1FEE-7C3F-4CB6-95F6-32F95BDFEFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1AE1FEE-7C3F-4CB6-95F6-32F95BDFEFEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EF3AFB2-A645-4FBD-B8A1-D68630FDD729}.Debug|Any CPU.ActiveCfg = Debug
+		{7EF3AFB2-A645-4FBD-B8A1-D68630FDD729}.Debug|Any CPU.Build.0 = Debug
+		{7EF3AFB2-A645-4FBD-B8A1-D68630FDD729}.Release|Any CPU.ActiveCfg = Release
+		{7EF3AFB2-A645-4FBD-B8A1-D68630FDD729}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
