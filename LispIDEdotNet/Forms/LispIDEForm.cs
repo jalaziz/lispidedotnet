@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Globalization;
 using System.Windows.Forms;
 using LispIDEdotNet.Utilities;
+using LispIDEdotNet.Utilities.Configuration;
 using ScintillaNet;
 using WeifenLuo.WinFormsUI.Docking;
 using ConfigurationManager=LispIDEdotNet.Utilities.ConfigurationManager;
@@ -22,7 +24,7 @@ namespace LispIDEdotNet.Forms
         private bool toolstripButtonsEnabled = true;
 
         private LispPipe lispPipe;
-        private ConfigurationManager config;
+        private ScintillaConfigurationManager scintillaConfig;
 
         private LispEditor activeDocument;
 
@@ -41,19 +43,20 @@ namespace LispIDEdotNet.Forms
         {
             InitializeComponent();
             SetToolstripItemsEnabled(false);
-            this.config = new ConfigurationManager();
+
+            this.scintillaConfig = new ScintillaConfigurationManager();
 
             this.lispPipe = new IntegratedLispPipe();
-            this.lispPipe.Scintilla.ConfigurationManager.Configure(this.config.PipeScintillaConfiguration);
+            this.lispPipe.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.PipeScintillaConfiguration);
             this.lispPipe.Scintilla.IsBraceMatching = true;
             this.lispPipe.Show(this.dockPanel1, DockState.DockBottom);
             this.lispPipe.LispPath = @"C:\GCL-ANSI\bin\gcl1.bat";
 
 
             SeperatedLispPipe slp = new SeperatedLispPipe();
-            slp.Scintilla.ConfigurationManager.Configure(this.config.PipeScintillaConfiguration);
+            slp.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.PipeScintillaConfiguration);
             slp.Scintilla.IsBraceMatching = true;
-            slp.ScintillaBuffer.ConfigurationManager.Configure(this.config.PipeScintillaConfiguration);
+            slp.ScintillaBuffer.ConfigurationManager.Configure(this.scintillaConfig.PipeScintillaConfiguration);
             slp.ScintillaBuffer.IsBraceMatching = true;
             slp.ScintillaBuffer.LineWrap.Mode = WrapMode.None;
             slp.Show(this.dockPanel1, DockState.DockBottom);
@@ -64,7 +67,32 @@ namespace LispIDEdotNet.Forms
             //For some reason, enter is not available in the form designer
             this.sendToLispToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Enter;
             this.macroexpandToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.Enter;
+
+            ConfigurationManager.RecentFiles.RecentFileChanged +=
+                new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileChanged);
+            ConfigurationManager.RecentFiles.RecentFileClicked +=
+                new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileClicked);
+            ConfigurationManager.RecentFiles.GenerateRecentFiles(recentFilesToolStripMenuItem);
+
+            recentFilesToolStripMenuItem.Visible = (ConfigurationManager.RecentFiles.FileList.Count > 0);
+            recentFilesToolstripSeperator.Visible = recentFilesToolStripMenuItem.Visible;
         }
+
+        #region Recent File Events
+
+        private void recentFiles_RecentFileClicked(object sender, RecentFileEventArgs e)
+        {
+            OpenFile(e.FilePath);
+        }
+
+        private void recentFiles_RecentFileChanged(object sender, RecentFileEventArgs e)
+        {
+            ConfigurationManager.RecentFiles.GenerateRecentFiles(recentFilesToolStripMenuItem);
+            recentFilesToolStripMenuItem.Visible = (ConfigurationManager.RecentFiles.FileList.Count > 0);
+            recentFilesToolstripSeperator.Visible = recentFilesToolStripMenuItem.Visible;
+        }
+
+        #endregion Recent File Events
 
         #region File Menu Events
 
@@ -267,20 +295,12 @@ namespace LispIDEdotNet.Forms
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(this.ActiveDocument != null)
-                this.ActiveDocument.Close();
+                FileCommands.Close(this.ActiveDocument);
         }
 
         private void closeAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IDockContent[] editors = this.dockPanel1.DocumentsToArray();
-            foreach (IDockContent editor in editors)
-            {
-                LispEditor leditor = editor as LispEditor;
-                if (leditor != null)
-                {
-                    leditor.Close();
-                }
-            }
+            FileCommands.CloseAll(this.dockPanel1.DocumentsToArray());
         }
 
         #endregion Window Events
@@ -395,7 +415,10 @@ namespace LispIDEdotNet.Forms
 
         private void ShowEditor(LispEditor editor)
         {
-            editor.Scintilla.ConfigurationManager.Configure(this.config.ScintillaConfiguration);
+            if(editor == null)
+                return;
+
+            editor.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.ScintillaConfiguration);
             editor.Scintilla.IsBraceMatching = true;
             editor.Show(this.dockPanel1);
             SetStatusLabels();
@@ -413,15 +436,22 @@ namespace LispIDEdotNet.Forms
 
             foreach (string filePath in files)
             {
-                // Ensure this file isn't already open
-                if (!IsOpen(filePath))
+                OpenFile(filePath);
+            }
+        }
+
+        private void OpenFile(string filePath)
+        {
+            // Ensure this file isn't already open
+            if (!IsOpen(filePath))
+            {
+                LispEditor editor = FileCommands.OpenFile(filePath); //Open the file
+
+                if (editor != null)
                 {
-                    LispEditor editor = FileCommands.OpenFile(filePath); //Open the file
                     ShowEditor(editor);
                 }
             }
-
-            return;
         }
 
         private bool IsOpen(string filePath)

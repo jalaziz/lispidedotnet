@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LispIDEdotNet.Forms;
+using LispIDEdotNet.Utilities.Configuration;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace LispIDEdotNet.Utilities
 {
-    static class FileCommands
+    class FileCommands
     {
         #region Fields
 
@@ -22,6 +24,15 @@ namespace LispIDEdotNet.Utilities
         public static string defaultExt = "lsp";
 
         #endregion Fields
+
+        #region Event Handlers
+
+        public static event EventHandler<FileCommandEventArgs> FileCreated;
+        public static event EventHandler<FileCommandEventArgs> FileOpened;
+        public static event EventHandler<FileCommandEventArgs> FileSaved;
+        public static event EventHandler<FileCommandEventArgs> FileClosed;
+
+        #endregion
 
         #region Properties
 
@@ -58,6 +69,8 @@ namespace LispIDEdotNet.Utilities
             LispEditor editor = new LispEditor();
             editor.Text = string.Format(CultureInfo.CurrentCulture, "{0}{1}", NEW_DOCUMENT_TEXT, ++newDocumentCount);
 
+            OnFileCreated(null, editor.Text, editor);
+
             return editor;
         }
 
@@ -78,14 +91,33 @@ namespace LispIDEdotNet.Utilities
 
         public static LispEditor OpenFile(string filePath)
         {
-            LispEditor editor = new LispEditor();
-            editor.Scintilla.Text = File.ReadAllText(filePath);
-            editor.Scintilla.UndoRedo.EmptyUndoBuffer();
-            editor.Scintilla.Modified = false;
-            editor.Text = Path.GetFileName(filePath);
-            editor.FilePath = filePath;
+            try
+            {
+                LispEditor editor = new LispEditor();
+                editor.Scintilla.Text = File.ReadAllText(filePath);
+                editor.Scintilla.UndoRedo.EmptyUndoBuffer();
+                editor.Scintilla.Modified = false;
+                editor.Text = Path.GetFileName(filePath);
+                editor.FilePath = filePath;
 
-            return editor;
+                OnFileOpened(editor.FilePath, editor.Text, editor);
+
+                return editor;
+            }
+            catch (FileNotFoundException fex)
+            {
+                ConfigurationManager.RecentFiles.RemoveRecentFile(filePath);
+                MessageBox.Show("Cannot open file \"" + filePath + "\". The file was not found.", "File not found",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cannot open file \"" + filePath + "\". There was an error opening the file.",
+                                "Error opening file",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return null;
         }
 
         public static bool SaveAll(IWin32Window owner, IEnumerable<IDockContent> documents)
@@ -138,13 +170,118 @@ namespace LispIDEdotNet.Utilities
                 editor.FilePath = filePath;
                 editor.Text = Path.GetFileName(filePath);
                 editor.Scintilla.Modified = false;
+
+                OnFileSaved(editor.FilePath, editor.Text, editor);
+
                 return true;
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot save file \"" + filePath + "\".\nException: " + ex.Message,
+                                "Error saving file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             return false;
         }
 
+        public static void Close(LispEditor editor)
+        {
+            if(editor != null)
+            {
+                string path = editor.FilePath;
+                string name = editor.Text;
+                editor.Close();
+                OnFileClosed(path, name, editor);
+            }
+        }
+
+        public static void CloseAll(IDockContent[] editors)
+        {
+            foreach (IDockContent editor in editors)
+            {
+                LispEditor leditor = editor as LispEditor;
+                if (leditor != null)
+                {
+                    string path = leditor.FilePath;
+                    string name = leditor.Text;
+                    leditor.Close();
+                    OnFileClosed(path, name, leditor);
+                }
+            }
+        }
+
         #endregion Methods
+
+        #region Events
+
+        protected static void OnFileCreated(string file, string name, LispEditor editor)
+        {
+            if (FileCreated != null)
+                FileCreated(null, new FileCommandEventArgs(file, name, editor));
+        }
+
+        protected static void OnFileOpened(string file, string name, LispEditor editor)
+        {
+            ConfigurationManager.RecentFiles.AddRecentFile(file);
+            ConfigurationManager.Save();
+
+            if (FileOpened != null)
+                FileOpened(null, new FileCommandEventArgs(file, name, editor));
+        }
+
+        protected static void OnFileSaved(string file, string name, LispEditor editor)
+        {
+            ConfigurationManager.RecentFiles.AddRecentFile(file);
+            ConfigurationManager.Save();
+
+            if (FileSaved != null)
+                FileSaved(null, new FileCommandEventArgs(file, name, editor));
+        }
+
+        protected static void OnFileClosed(string file, string name, LispEditor editor)
+        {
+            if (FileClosed != null)
+                FileClosed(null, new FileCommandEventArgs(file, name, editor));
+        }
+
+        #endregion Events
+    }
+
+    public class FileCommandEventArgs : EventArgs
+    {
+        private string path;
+        private string name;
+        private LispEditor editor;
+
+        public FileCommandEventArgs(string file, string name, LispEditor editor)
+        {
+            this.path = file;
+            this.name = name;
+            this.editor = editor;
+        }
+
+        public string FilePath
+        {
+            get
+            {
+                return path;
+            }
+        }
+
+        public string EditorTabText
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        public LispEditor Editor
+        {
+            get
+            {
+                return editor;
+            }
+        }
     }
 }

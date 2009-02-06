@@ -13,6 +13,22 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkSubset>Client</TargetFrameworkSubset>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>Resources\LispIDE.ico</ApplicationIcon>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +50,7 @@
   <ItemGroup>
     <Reference Include="ScintillaNet, Version=2.0.3314.5600, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,10 +65,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\C#\DockPanel\Release\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\AboutDialog.cs">
@@ -75,8 +89,13 @@
     <Compile Include="Components\IntegratedScintillaPipe.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Utilities\FileCommands.cs" />
     <Compile Include="Utilities\ConfigurationManager.cs" />
+    <Compile Include="Utilities\Configuration\LispIDEConfigSection.cs" />
+    <Compile Include="Utilities\Configuration\OpenDocumentElement.cs" />
+    <Compile Include="Utilities\Configuration\OpenDocumentsCollection.cs" />
+    <Compile Include="Utilities\Configuration\RecentFiles.cs" />
+    <Compile Include="Utilities\FileCommands.cs" />
+    <Compile Include="Utilities\ScintillaConfigurationManager.cs" />
     <Compile Include="Forms\LispEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +162,7 @@
     <Compile Include="Forms\SeperatedLispPipe.Designer.cs">
       <DependentUpon>SeperatedLispPipe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\OpenDocuments.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\config.xml">
@@ -166,11 +186,45 @@
     <Content Include="SciLexer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ScintillaNet.dll" />
+    <Content Include="WeifenLuo.WinFormsUI.Docking.dll" />
     <None Include="Resources\LispIDE.ico" />
     <None Include="Resources\Network-Pipe.ico" />
     <None Include="Resources\new_document_lined_16.ico" />
     <None Include="Resources\resetlisp.bmp" />
     <None Include="Resources\sendtolisp.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

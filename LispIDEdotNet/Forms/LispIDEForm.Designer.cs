@@ -42,6 +42,8 @@
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.recentFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recentFilesToolstripSeperator = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,8 +130,6 @@
             this.linuxEOLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.macEOLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.SuspendLayout();
             this.standardMenuStrip.SuspendLayout();
             this.standardToolStrip.SuspendLayout();
@@ -180,8 +180,8 @@
             this.printToolStripMenuItem,
             this.printPreviewToolStripMenuItem,
             this.toolStripSeparator4,
-            this.toolStripMenuItem1,
-            this.toolStripSeparator16,
+            this.recentFilesToolStripMenuItem,
+            this.recentFilesToolstripSeperator,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -267,6 +267,17 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(184, 6);
+            // 
+            // recentFilesToolStripMenuItem
+            // 
+            this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
+            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.recentFilesToolStripMenuItem.Text = "Recent &Files";
+            // 
+            // recentFilesToolstripSeperator
+            // 
+            this.recentFilesToolstripSeperator.Name = "recentFilesToolstripSeperator";
+            this.recentFilesToolstripSeperator.Size = new System.Drawing.Size(184, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -995,17 +1006,6 @@
             this.dockPanel1.TabIndex = 1;
             this.dockPanel1.ActiveDocumentChanged += new System.EventHandler(this.dockPanel1_ActiveDocumentChanged);
             // 
-            // toolStripSeparator16
-            // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(184, 6);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(187, 22);
-            this.toolStripMenuItem1.Text = "Recent &Files";
-            // 
             // LispIDEForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1136,8 +1136,8 @@
         private System.Windows.Forms.ToolStripMenuItem sendToLispToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem macroexpandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetLispToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
+        private System.Windows.Forms.ToolStripMenuItem recentFilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator recentFilesToolstripSeperator;
 
 
     }

@@ -297,20 +297,12 @@ namespace LispIDEdotNet.Forms
 
             void closeAllContextMenuItem_Click(object sender, EventArgs e)
             {
-                IDockContent[] editors = this.parent.DockPanel.DocumentsToArray();
-                foreach (IDockContent editor in editors)
-                {
-                    LispEditor leditor = editor as LispEditor;
-                    if (leditor != null)
-                    {
-                        leditor.Close();
-                    }
-                }
+                FileCommands.CloseAll(this.parent.DockPanel.DocumentsToArray());
             }
 
             void closeContextMenuItem_Click(object sender, EventArgs e)
             {
-                this.parent.Close();
+                FileCommands.Close(this.parent);
             }
 
             private void copyFilePathContextMenuItem_Click(object sender, EventArgs e)

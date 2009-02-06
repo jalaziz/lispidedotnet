@@ -15,38 +15,50 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_167D1D21038FEA8D714D4B7D7C8C87D9"
-        "OwnerKey" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_784483ACC02E43652CA995878CEA179C"
+        "MsmKey" = "8:_A3A780D6DDD130BCB23D833445C5917C"
+        "OwnerKey" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F2E9CBF415BA8C2886755515F47276F5"
+        "OwnerKey" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FC7FA0C77EF54480BABDA0C34979D222"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
+        "OwnerKey" = "8:_FC7FA0C77EF54480BABDA0C34979D222"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_784483ACC02E43652CA995878CEA179C"
+        "OwnerKey" = "8:_A3A780D6DDD130BCB23D833445C5917C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_167D1D21038FEA8D714D4B7D7C8C87D9"
+        "OwnerKey" = "8:_F2E9CBF415BA8C2886755515F47276F5"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -116,6 +128,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
+                    {
+                    "Name" = "8:.NET Framework 3.5 SP1"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -146,20 +171,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_167D1D21038FEA8D714D4B7D7C8C87D9"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A3A780D6DDD130BCB23D833445C5917C"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ScintillaNet, Version=2.0.3314.5600, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_167D1D21038FEA8D714D4B7D7C8C87D9"
+                    "_A3A780D6DDD130BCB23D833445C5917C"
                     {
-                    "Name" = "8:ScintillaNet.dll"
+                    "Name" = "8:WeifenLuo.WinFormsUI.Docking.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:ScintillaNet.dll"
+            "SourcePath" = "8:WeifenLuo.WinFormsUI.Docking.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
@@ -177,20 +202,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_784483ACC02E43652CA995878CEA179C"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F2E9CBF415BA8C2886755515F47276F5"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ScintillaNet, Version=2.0.3314.5600, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_784483ACC02E43652CA995878CEA179C"
+                    "_F2E9CBF415BA8C2886755515F47276F5"
                     {
-                    "Name" = "8:WeifenLuo.WinFormsUI.Docking.dll"
+                    "Name" = "8:ScintillaNet.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:WeifenLuo.WinFormsUI.Docking.dll"
+            "SourcePath" = "8:ScintillaNet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
@@ -229,9 +254,9 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_3ED1691C6FFD4D589CF3DE934E73D40E"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
+            "Condition" = "8:FILEEXISTS1<>\"LispIDE.Net\""
+            "Transitive" = "11:TRUE"
             "Property" = "8:DesktopFolder"
                 "Folders"
                 {
@@ -246,6 +271,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_F34D09B80EA84A3EB54C998340178369"
+                    {
+                    "Name" = "8:LispIDEdotNet"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_627E680896344BF38B105437EB098194"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -264,14 +300,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{9C053E79-1767-41BB-8F73-5A867261ED62}"
-        "PackageCode" = "8:{B072BF92-B171-4BF8-B7BB-76632665B6CA}"
+        "ProductCode" = "8:{A8506AEC-2D01-4AC9-A903-09225B65A3A1}"
+        "PackageCode" = "8:{D6DF5997-8D7E-4A10-B317-1B4A4ECCA5F8}"
         "UpgradeCode" = "8:{098C7287-F08E-46A5-BE2B-406C5B56056A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -384,6 +420,48 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_056F139A7A564245A6630DFBBAF2813E"
+            {
+            "Name" = "8:LispIDE.Net"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:32512"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
+            "Folder" = "8:_3ED1691C6FFD4D589CF3DE934E73D40E"
+            "WorkingFolder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
+            "Icon" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2FB923F581F04F61BEDEC5ADE72D05E1"
+            {
+            "Name" = "8:LispIDE.Net"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:32512"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
+            "Folder" = "8:_F34D09B80EA84A3EB54C998340178369"
+            "WorkingFolder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
+            "Icon" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D2FE38C00C694012BEDAE0D573D9D6F3"
+            {
+            "Name" = "8:Uninstall LispIDE.Net"
+            "Arguments" = "8:/u=[ProductCode]"
+            "Description" = "8:"
+            "ShowCmd" = "3:7"
+            "IconIndex" = "3:32512"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_FC7FA0C77EF54480BABDA0C34979D222"
+            "Folder" = "8:_F34D09B80EA84A3EB54C998340178369"
+            "WorkingFolder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
+            "Icon" = "8:_FC7FA0C77EF54480BABDA0C34979D222"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -785,7 +863,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_71E9C9FB6EF74131AFB2AB864404991A"
             {
-            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Debug\\LispIDE.Net.exe"
+            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Release\\LispIDE.Net.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
@@ -863,6 +941,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:XmlSerializer"
             "OutputProjectGuid" = "8:{C1AE1FEE-7C3F-4CB6-95F6-32F95BDFEFEF}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FC7FA0C77EF54480BABDA0C34979D222"
+            {
+            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{6CA3F8E9-634F-48EE-8D7D-6F592A54A583}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
