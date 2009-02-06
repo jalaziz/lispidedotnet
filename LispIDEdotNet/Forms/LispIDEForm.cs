@@ -74,8 +74,9 @@ namespace LispIDEdotNet.Forms
                 new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileClicked);
             ConfigurationManager.RecentFiles.GenerateRecentFiles(recentFilesToolStripMenuItem);
 
-            recentFilesToolStripMenuItem.Visible = (ConfigurationManager.RecentFiles.FileList.Count > 0);
-            recentFilesToolstripSeperator.Visible = recentFilesToolStripMenuItem.Visible;
+            bool showRecentFiles = (ConfigurationManager.RecentFiles.FileList.Count > 0);
+            recentFilesToolStripMenuItem.Visible = showRecentFiles;
+            recentFilesToolstripSeperator.Visible = showRecentFiles;
         }
 
         #region Recent File Events
@@ -88,8 +89,9 @@ namespace LispIDEdotNet.Forms
         private void recentFiles_RecentFileChanged(object sender, RecentFileEventArgs e)
         {
             ConfigurationManager.RecentFiles.GenerateRecentFiles(recentFilesToolStripMenuItem);
-            recentFilesToolStripMenuItem.Visible = (ConfigurationManager.RecentFiles.FileList.Count > 0);
-            recentFilesToolstripSeperator.Visible = recentFilesToolStripMenuItem.Visible;
+            bool showRecentFiles = (ConfigurationManager.RecentFiles.FileList.Count > 0);
+            recentFilesToolStripMenuItem.Visible = showRecentFiles;
+            recentFilesToolstripSeperator.Visible = showRecentFiles;
         }
 
         #endregion Recent File Events
