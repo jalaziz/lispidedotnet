@@ -162,7 +162,6 @@
     <Compile Include="Forms\SeperatedLispPipe.Designer.cs">
       <DependentUpon>SeperatedLispPipe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\OpenDocuments.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\config.xml">

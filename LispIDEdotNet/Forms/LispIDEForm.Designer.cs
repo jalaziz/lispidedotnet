@@ -1020,6 +1020,7 @@
             this.Name = "LispIDEForm";
             this.Text = "LispIDE.Net";
             this.Load += new System.EventHandler(this.LispIDEForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LispIDEForm_FormClosing);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             this.standardMenuStrip.ResumeLayout(false);

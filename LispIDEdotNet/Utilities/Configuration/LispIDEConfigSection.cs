@@ -38,9 +38,12 @@ namespace LispIDEdotNet.Utilities.Configuration
         {
             recentFilesProperty = new ConfigurationProperty("RecentFiles", typeof(RecentFiles), null,
                                                             ConfigurationPropertyOptions.IsRequired);
+            openDocumentsProperty = new ConfigurationProperty("OpenDocuments", typeof(OpenDocumentsCollection), null,
+                                                              ConfigurationPropertyOptions.IsDefaultCollection);
 
             properties = new ConfigurationPropertyCollection();
             properties.Add(recentFilesProperty);
+            properties.Add(openDocumentsProperty);
         }
 
         #endregion Constructors
@@ -51,6 +54,12 @@ namespace LispIDEdotNet.Utilities.Configuration
         public RecentFiles RecentFiles
         {
             get { return (RecentFiles)base[recentFilesProperty]; }
+        }
+
+        [ConfigurationProperty("OpenDocuments", IsDefaultCollection = true)]
+        public OpenDocumentsCollection OpenDocuments
+        {
+            get { return (OpenDocumentsCollection)base[openDocumentsProperty]; }
         }
 
         protected override ConfigurationPropertyCollection Properties

@@ -35,6 +35,14 @@ namespace LispIDEdotNet.Utilities
             }
         }
 
+        public static OpenDocumentsCollection OpenDocuments
+        {
+            get
+            {
+                return configSection.OpenDocuments;
+            }
+        }
+
         public static void Save()
         {
             configSection.Save();

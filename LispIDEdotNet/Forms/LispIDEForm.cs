@@ -52,7 +52,6 @@ namespace LispIDEdotNet.Forms
             this.lispPipe.Show(this.dockPanel1, DockState.DockBottom);
             this.lispPipe.LispPath = @"C:\GCL-ANSI\bin\gcl1.bat";
 
-
             SeperatedLispPipe slp = new SeperatedLispPipe();
             slp.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.PipeScintillaConfiguration);
             slp.Scintilla.IsBraceMatching = true;
@@ -350,6 +349,12 @@ namespace LispIDEdotNet.Forms
         {
             this.Text = Program.Title;
             this.aboutToolStripMenuItem.Text = String.Format(CultureInfo.CurrentCulture, "&About {0}...", Program.Title);
+            LoadOpenDocuments();
+        }
+
+        private void LispIDEForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveOpenDocuments();
         }
 
         private void dockPanel1_ActiveDocumentChanged(object sender, EventArgs e)
@@ -415,21 +420,50 @@ namespace LispIDEdotNet.Forms
 
         #region Methods
 
-        private void ShowEditor(LispEditor editor)
+        private void SaveOpenDocuments()
+        {
+            ConfigurationManager.OpenDocuments.Clear();
+
+            foreach (LispEditor editor in dockPanel1.Documents)
+            {
+                if(editor != null && !String.IsNullOrEmpty(editor.FilePath))
+                {
+                    OpenDocumentElement doc = new OpenDocumentElement();
+                    doc.Name = editor.Text;
+                    doc.FilePath = editor.FilePath;
+                    doc.DockState = editor.DockState;
+                    ConfigurationManager.OpenDocuments.Add(doc);
+                }
+            }
+
+            ConfigurationManager.Save();
+        }
+
+        private void LoadOpenDocuments()
+        {
+            OpenDocumentsCollection docs = ConfigurationManager.OpenDocuments;
+
+            foreach (OpenDocumentElement doc in docs)
+            {
+                OpenFile(doc.FilePath, doc.DockState);
+            }
+        }
+
+        private void ShowEditor(LispEditor editor, DockState dockState)
         {
             if(editor == null)
                 return;
 
             editor.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.ScintillaConfiguration);
             editor.Scintilla.IsBraceMatching = true;
-            editor.Show(this.dockPanel1);
+            editor.Show(this.dockPanel1, dockState);
             SetStatusLabels();
         }
 
         private void NewFile()
         {
             LispEditor editor = FileCommands.NewFile();
-            ShowEditor(editor);
+            ShowEditor(editor, DockState.Document);
         }
 
         private void OpenFile()
@@ -444,6 +478,11 @@ namespace LispIDEdotNet.Forms
 
         private void OpenFile(string filePath)
         {
+            OpenFile(filePath, DockState.Document);
+        }
+
+        private void OpenFile(string filePath, DockState dockState)
+        {
             // Ensure this file isn't already open
             if (!IsOpen(filePath))
             {
@@ -451,7 +490,7 @@ namespace LispIDEdotNet.Forms
 
                 if (editor != null)
                 {
-                    ShowEditor(editor);
+                    ShowEditor(editor, dockState);
                 }
             }
         }
