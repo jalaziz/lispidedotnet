@@ -1,129 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
+using System.Configuration;
 using System.Linq;
 using System.Text;
-using ScintillaNet.Configuration;
+using LispIDEdotNet.Utilities.Configuration;
 
 namespace LispIDEdotNet.Utilities
 {
     class ConfigurationManager
     {
-        #region Fields
+        private static readonly LispIDEConfigSection configSection;
 
-        private const string CONFIG_FOLDER = "config";
-        private const string LISP_CONFIG = "lisp.xml";
-        private const string PIPE_CONFIG = "lispPipe.xml";
-        private const string CONFIG_DOCUMENT = "config.xml";
+        private ConfigurationManager()
+        { }
 
-        private readonly string LISP_CONFIG_PATH = Path.Combine(CONFIG_FOLDER, LISP_CONFIG);
-        private readonly string LISP_PIPE_CONFIG_PATH = Path.Combine(CONFIG_FOLDER, PIPE_CONFIG);
-        private readonly string CONFIG_DOCUMENT_PATH = Path.Combine(CONFIG_FOLDER, CONFIG_DOCUMENT);
+        static ConfigurationManager()
+        {
+            configSection = LispIDEConfigSection.GetSection(ConfigurationUserLevel.PerUserRoamingAndLocal);
+        }
 
-        private string lispConfigPath;
-        private string lispPipeConfigPath;
-        private string configDocPath;
-
-        private Configuration scintillaConfiguration;
-        private Configuration pipeScintillaConfiguration;
-
-        #endregion Fields
-
-        #region Properties
-
-        public string LispConfigPath
+        public static LispIDEConfigSection ConfigSection
         {
             get
             {
-                return this.lispConfigPath ?? this.LISP_CONFIG_PATH;
-            }
-            set
-            {
-                this.lispConfigPath = value;
-                LoadScintillaConfiguration();
+                return configSection;
             }
         }
 
-        public string LispPipeConfigPath
+        public static RecentFiles RecentFiles
         {
             get
             {
-                return this.lispPipeConfigPath ?? this.LISP_PIPE_CONFIG_PATH;
-            }
-            set
-            {
-                this.lispPipeConfigPath = value;
-                LoadPipeScintillaConfiguration();
+                return configSection.RecentFiles;
             }
         }
 
-        public string ConfigDocumentPath
+        public static void Save()
         {
-            get
-            {
-                return this.configDocPath ?? this.CONFIG_DOCUMENT_PATH;
-            }
-            set
-            {
-                this.configDocPath = value;
-            }
+            configSection.Save();
         }
-
-        public Configuration ScintillaConfiguration
-        {
-            get
-            {
-                return this.scintillaConfiguration;
-            }
-        }
-
-        public Configuration PipeScintillaConfiguration
-        {
-            get
-            {
-                return this.pipeScintillaConfiguration;
-            }
-        }
-
-        #endregion Properties
-
-        public ConfigurationManager()
-        {
-            LoadScintillaConfiguration();
-            LoadPipeScintillaConfiguration();
-
-            foreach (StyleConfig style in this.scintillaConfiguration.Styles)
-            {
-                if(style.FontName == null)
-                {
-                    style.FontName = FontFamily.GenericMonospace.Name;
-                    style.Size = 11;
-                }
-            }
-
-            foreach (StyleConfig style in this.pipeScintillaConfiguration.Styles)
-            {
-                if(style.FontName == null)
-                {
-                    style.FontName = FontFamily.GenericMonospace.Name;
-                    style.Size = 11;
-                }
-            }
-        }
-
-        #region Methods
-
-        private void LoadScintillaConfiguration()
-        {
-            this.scintillaConfiguration = new Configuration(this.LispConfigPath, "lisp", true);
-        }
-
-        private void LoadPipeScintillaConfiguration()
-        {
-            this.pipeScintillaConfiguration = new Configuration(this.LispPipeConfigPath, "lisp", true);
-        }
-
-        #endregion Methods
     }
 }
