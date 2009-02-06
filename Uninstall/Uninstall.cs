@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Uninstall
 {
+    // Source: http://gaaton.blogspot.com/2006/07/add-uninstall-and-him-shortcut-to-net.html
     class Uninstall
     {
         static void Main(string[] args)
