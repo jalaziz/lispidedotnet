@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScintillaNet, Version=2.0.3314.5600, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
+    <Reference Include="ScintillaNet, Version=2.0.3324.23684, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">

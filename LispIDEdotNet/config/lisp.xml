@@ -117,6 +117,7 @@
     <Margins>
       <Margin Number="0" Width="35"/>
       <Margin Number="1" Width="15" IsMarkerMargin="true" IsClickable="true" AutoToggleMarkerNumber="0"/>
+      <Margin Number="2" Width="14" IsFoldMargin="true" IsClickable="true" />
     </Margins>
 
     <Markers>
