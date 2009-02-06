@@ -164,9 +164,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config\config.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="config\lispPipe.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
