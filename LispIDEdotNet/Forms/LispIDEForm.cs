@@ -350,10 +350,12 @@ namespace LispIDEdotNet.Forms
             this.Text = Program.Title;
             this.aboutToolStripMenuItem.Text = String.Format(CultureInfo.CurrentCulture, "&About {0}...", Program.Title);
             LoadOpenDocuments();
+            ConfigurationManager.LoadWindowState(this);
         }
 
         private void LispIDEForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ConfigurationManager.SaveWindowState(this);
             SaveOpenDocuments();
         }
 
