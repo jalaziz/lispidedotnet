@@ -206,7 +206,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ScintillaNet, Version=2.0.3314.5600, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ScintillaNet, Version=2.0.3324.23684, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_F2E9CBF415BA8C2886755515F47276F5"
@@ -300,14 +300,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{A8506AEC-2D01-4AC9-A903-09225B65A3A1}"
-        "PackageCode" = "8:{D6DF5997-8D7E-4A10-B317-1B4A4ECCA5F8}"
+        "ProductCode" = "8:{5AA57575-029E-40D1-9058-C4E0A5339B7A}"
+        "PackageCode" = "8:{241A8D21-D891-4DB1-A73C-A29BB56D741B}"
         "UpgradeCode" = "8:{098C7287-F08E-46A5-BE2B-406C5B56056A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
