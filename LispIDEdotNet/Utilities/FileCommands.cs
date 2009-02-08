@@ -104,7 +104,7 @@ namespace LispIDEdotNet.Utilities
 
                 return editor;
             }
-            catch (FileNotFoundException fex)
+            catch (FileNotFoundException)
             {
                 ConfigurationManager.RecentFiles.RemoveRecentFile(filePath);
                 MessageBox.Show("Cannot open file \"" + filePath + "\". The file was not found.", "File not found",

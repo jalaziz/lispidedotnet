@@ -74,7 +74,7 @@ namespace LispIDEdotNet.Utilities.Configuration
             }
         }
 
-        public OpenDocumentElement this[string name]
+        public new OpenDocumentElement this[string name]
         {
             get { return (OpenDocumentElement)base.BaseGet(name); }
         }

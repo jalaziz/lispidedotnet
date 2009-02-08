@@ -24,7 +24,7 @@ namespace LispIDEdotNet.Forms
 
         private AsyncStreamReader output;
 
-        private bool carryNewLine = false;
+        //private bool carryNewLine = false;
 
         #endregion Fields
 
@@ -86,7 +86,7 @@ namespace LispIDEdotNet.Forms
             {
                 this.stdInWriter.Write(text);
                 this.stdInWriter.Flush();
-                this.carryNewLine = true;
+                //this.carryNewLine = true;
             }
         }
 
