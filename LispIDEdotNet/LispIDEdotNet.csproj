@@ -182,9 +182,9 @@
     <Content Include="SciLexer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScintillaNet.dll" />
+    <None Include="ScintillaNet.dll" />
     <Content Include="License.txt" />
-    <Content Include="WeifenLuo.WinFormsUI.Docking.dll" />
+    <None Include="WeifenLuo.WinFormsUI.Docking.dll" />
     <None Include="Resources\LispIDE.ico" />
     <None Include="Resources\Network-Pipe.ico" />
     <None Include="Resources\new_document_lined_16.ico" />
