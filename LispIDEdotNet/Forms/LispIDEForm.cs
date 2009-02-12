@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using LispIDEdotNet.Utilities;
@@ -321,6 +322,90 @@ namespace LispIDEdotNet.Forms
             this.statusStrip1.Visible = this.statusBarToolStripMenuItem.Checked;
         }
 
+        private void resetZoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.Zoom = 0;
+        }
+
+        private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ++ActiveDocument.Scintilla.Zoom;
+        }
+
+        private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                --ActiveDocument.Scintilla.Zoom;
+        }
+
+        private void whitespaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WhitespaceMode whitespaceMode = whitespaceToolStripMenuItem.Checked
+                                                ? WhitespaceMode.VisibleAlways
+                                                : WhitespaceMode.Invisible;
+
+            foreach (LispEditor editor in this.dockPanel1.Documents)
+            {
+                editor.Scintilla.Whitespace.Mode = whitespaceMode;
+            }
+        }
+
+        private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WrapMode wrapMode = wordWrapToolStripMenuItem.Checked ? WrapMode.Word : WrapMode.None;
+
+            foreach (LispEditor editor in this.dockPanel1.Documents)
+            {
+                editor.Scintilla.LineWrap.Mode = wrapMode;
+            }
+        }
+
+        private void endOfLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool showEOL = endOfLineToolStripMenuItem.Checked;
+
+            foreach (LispEditor editor in this.dockPanel1.Documents)
+            {
+                editor.Scintilla.EndOfLine.IsVisible = showEOL;
+            }
+        }
+
+        private void lineNumbersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int lineNumbers = lineNumbersToolStripMenuItem.Checked ? 35 : 0;
+
+            foreach (LispEditor editor in this.dockPanel1.Documents)
+            {
+                editor.Scintilla.Margins[0].Width = lineNumbers;
+            }
+        }
+
+        private void indentGuideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IndentGuideView guideView = indentGuideToolStripMenuItem.Checked
+                                            ? IndentGuideView.LookForward
+                                            : IndentGuideView.None;
+
+            foreach (LispEditor editor in this.dockPanel1.Documents)
+            {
+                editor.Scintilla.Indentation.Guides = guideView;
+            }
+        }
+
+        private void navigateForwardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.DocumentNavigation.NavigateForward();
+        }
+
+        private void navigateBackwardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.DocumentNavigation.NavigateBackward();
+        }
+
         #endregion View Events
 
         #region Help Menu Events
@@ -342,6 +427,71 @@ namespace LispIDEdotNet.Forms
         }
 
         #endregion Help Menu Events
+
+        #region Command Events
+
+        private void resetLispToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.lispPipe.StartLisp();
+        }
+
+        private void macroexpandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveDocument == null)
+                return;
+
+            string pipetext = this.ActiveDocument.GetPipeString();
+
+            if (!String.IsNullOrEmpty(pipetext))
+                this.lispPipe.SendCommand("(pprint (macroexpand-1 '" + pipetext + "))");
+        }
+
+        private void sendToLispToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveDocument == null)
+                return;
+
+            string pipetext = this.ActiveDocument.GetPipeString();
+
+            if (!String.IsNullOrEmpty(pipetext))
+                this.lispPipe.SendCommand(pipetext);
+        }
+
+        #endregion Command Events
+
+        #region StatusBar Events
+
+        private void macEOLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+            {
+                ActiveDocument.Scintilla.EndOfLine.Mode = EndOfLineMode.CR;
+                ActiveDocument.Scintilla.EndOfLine.ConvertAllLines(EndOfLineMode.CR);
+                SetStatusLabels();
+            }
+        }
+
+        private void linuxEOLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+            {
+                ActiveDocument.Scintilla.EndOfLine.Mode = EndOfLineMode.LF;
+                ActiveDocument.Scintilla.EndOfLine.ConvertAllLines(EndOfLineMode.LF);
+                SetStatusLabels();
+            }
+        }
+
+        private void dosEOLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+            {
+                ActiveDocument.Scintilla.EndOfLine.Mode = EndOfLineMode.Crlf;
+                ActiveDocument.Scintilla.EndOfLine.ConvertAllLines(EndOfLineMode.Crlf);
+                SetStatusLabels();
+            }
+        }
+
+        #endregion StatusBar Events
 
         #region Main Form Events
 
@@ -625,92 +775,5 @@ namespace LispIDEdotNet.Forms
         }
 
         #endregion Methods
-
-        private void resetZoomToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void whitespaceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void endOfLineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lineNumbersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void navigateForwardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void navigateBackwardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void macEOLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linuxEOLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dosEOLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void resetLispToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.lispPipe.StartLisp();
-        }
-
-        private void macroexpandToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if(this.ActiveDocument == null)
-                return;
-
-            string pipetext = this.ActiveDocument.GetPipeString();
-
-            if(!String.IsNullOrEmpty(pipetext))
-                this.lispPipe.SendCommand("(pprint (macroexpand-1 '" + pipetext + "))");
-        }
-
-        private void sendToLispToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.ActiveDocument == null)
-                return;
-
-            string pipetext = this.ActiveDocument.GetPipeString();
-
-            if (!String.IsNullOrEmpty(pipetext))
-                this.lispPipe.SendCommand(pipetext);
-        }
     }
 }

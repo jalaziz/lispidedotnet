@@ -97,7 +97,7 @@ namespace LispIDEdotNet.Utilities
 
             foreach (StyleConfig style in this.scintillaConfiguration.Styles)
             {
-                if(style.FontName == null)
+                if (style.FontName == null)
                 {
                     style.FontName = FontFamily.GenericMonospace.Name;
                     style.Size = 11;
@@ -106,7 +106,7 @@ namespace LispIDEdotNet.Utilities
 
             foreach (StyleConfig style in this.pipeScintillaConfiguration.Styles)
             {
-                if(style.FontName == null)
+                if (style.FontName == null)
                 {
                     style.FontName = FontFamily.GenericMonospace.Name;
                     style.Size = 11;

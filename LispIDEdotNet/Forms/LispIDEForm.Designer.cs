@@ -130,6 +130,7 @@
             this.linuxEOLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.macEOLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.indentGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.SuspendLayout();
             this.standardMenuStrip.SuspendLayout();
             this.standardToolStrip.SuspendLayout();
@@ -545,9 +546,10 @@
             this.toolbarToolStripMenuItem,
             this.statusBarToolStripMenuItem,
             this.toolStripSeparator12,
-            this.whitespaceToolStripMenuItem,
             this.wordWrapToolStripMenuItem,
+            this.whitespaceToolStripMenuItem,
             this.endOfLineToolStripMenuItem,
+            this.indentGuideToolStripMenuItem,
             this.toolStripSeparator13,
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem,
@@ -586,6 +588,7 @@
             // 
             // whitespaceToolStripMenuItem
             // 
+            this.whitespaceToolStripMenuItem.CheckOnClick = true;
             this.whitespaceToolStripMenuItem.Name = "whitespaceToolStripMenuItem";
             this.whitespaceToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.whitespaceToolStripMenuItem.Text = "W&hitespace";
@@ -593,6 +596,7 @@
             // 
             // wordWrapToolStripMenuItem
             // 
+            this.wordWrapToolStripMenuItem.CheckOnClick = true;
             this.wordWrapToolStripMenuItem.Name = "wordWrapToolStripMenuItem";
             this.wordWrapToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.wordWrapToolStripMenuItem.Text = "&Word Wrap";
@@ -600,6 +604,7 @@
             // 
             // endOfLineToolStripMenuItem
             // 
+            this.endOfLineToolStripMenuItem.CheckOnClick = true;
             this.endOfLineToolStripMenuItem.Name = "endOfLineToolStripMenuItem";
             this.endOfLineToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.endOfLineToolStripMenuItem.Text = "&End of Line";
@@ -638,6 +643,9 @@
             // 
             // lineNumbersToolStripMenuItem
             // 
+            this.lineNumbersToolStripMenuItem.Checked = true;
+            this.lineNumbersToolStripMenuItem.CheckOnClick = true;
+            this.lineNumbersToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.lineNumbersToolStripMenuItem.Name = "lineNumbersToolStripMenuItem";
             this.lineNumbersToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.lineNumbersToolStripMenuItem.Text = "Line Nu&mbers";
@@ -1006,6 +1014,14 @@
             this.dockPanel1.TabIndex = 1;
             this.dockPanel1.ActiveDocumentChanged += new System.EventHandler(this.dockPanel1_ActiveDocumentChanged);
             // 
+            // indentGuideToolStripMenuItem
+            // 
+            this.indentGuideToolStripMenuItem.CheckOnClick = true;
+            this.indentGuideToolStripMenuItem.Name = "indentGuideToolStripMenuItem";
+            this.indentGuideToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.indentGuideToolStripMenuItem.Text = "Indent &Guide";
+            this.indentGuideToolStripMenuItem.Click += new System.EventHandler(this.indentGuideToolStripMenuItem_Click);
+            // 
             // LispIDEForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1139,6 +1155,7 @@
         private System.Windows.Forms.ToolStripMenuItem resetLispToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recentFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator recentFilesToolstripSeperator;
+        private System.Windows.Forms.ToolStripMenuItem indentGuideToolStripMenuItem;
 
 
     }

@@ -143,8 +143,10 @@
       <Style Name="OPERATOR" Number="10" ForeColor="Red" FontName="Consolas" Size="11" />
       <Style Name="SPECIAL" Number="11" ForeColor="Red" FontName="Consolas" Size="11" />
       <Style Name="MULTI_COMMENT" Number="12" ForeColor="Cyan" FontName="Consolas" Size="11" />
+      <Style Name="DEFAULT" Number="32" FontName="Consolas" Size="11" />
       <Style Name="BRACELIGHT" Number="34" BackColor="LightGreen" FontName="Consolas" Size="11" />
       <Style Name="BRACEBAD" Number="35" BackColor="Red" FontName="Consolas" Size="11" />
+      <Style Name="INDENTGUIDE" Number="37" FontName="Consolas" Size="11" />
     </Styles>
 
     <Lexer LexerName="lisp" LineCommentPrefix=";" StreamCommentPrefix="#| " StreamCommentSuffix=" |#" >
