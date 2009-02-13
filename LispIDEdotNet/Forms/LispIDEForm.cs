@@ -290,6 +290,18 @@ namespace LispIDEdotNet.Forms
                 this.ActiveDocument.Scintilla.Commands.Execute(BindableCommand.LineUncomment);
         }
 
+        private void indentToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveDocument != null)
+                this.ActiveDocument.Scintilla.Commands.Execute(BindableCommand.Tab);
+        }
+
+        private void outdentToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveDocument != null)
+                this.ActiveDocument.Scintilla.Commands.Execute(BindableCommand.BackTab);
+        }
+
         #endregion Formatting Events
 
         #region Window Events
@@ -775,5 +787,30 @@ namespace LispIDEdotNet.Forms
         }
 
         #endregion Methods
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FontDialog fd = new FontDialog();
+            fd.FixedPitchOnly = false;
+            fd.FontMustExist = true;
+            fd.ShowColor = false;
+            fd.ShowHelp = false;
+            fd.ShowEffects = false;
+            fd.Apply += new EventHandler(fontDialog_Apply);
+            fd.ShowDialog(this);
+        }
+
+        private void fontDialog_Apply(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void lispPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Select Lisp Path";
+            ofd.Filter = "Lisp startup file (*.exe;*.bat;*.cmd)|*.exe;*.bat;*.cmd";
+            ofd.ShowDialog(this);
+        }
     }
 }

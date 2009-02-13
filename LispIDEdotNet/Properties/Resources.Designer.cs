@@ -67,6 +67,20 @@ namespace LispIDEdotNet.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CommentRegion {
+            get {
+                object obj = ResourceManager.GetObject("CommentRegion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap IndentHS {
+            get {
+                object obj = ResourceManager.GetObject("IndentHS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon LispIDE {
             get {
                 object obj = ResourceManager.GetObject("LispIDE", resourceCulture);
@@ -85,6 +99,13 @@ namespace LispIDEdotNet.Properties {
             get {
                 object obj = ResourceManager.GetObject("new_document_lined_16", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap OutdentHS {
+            get {
+                object obj = ResourceManager.GetObject("OutdentHS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -112,6 +133,13 @@ namespace LispIDEdotNet.Properties {
         internal static System.Drawing.Bitmap sendtolisp {
             get {
                 object obj = ResourceManager.GetObject("sendtolisp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap UnCommentRegion {
+            get {
+                object obj = ResourceManager.GetObject("UnCommentRegion", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

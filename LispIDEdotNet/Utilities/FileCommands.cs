@@ -20,8 +20,8 @@ namespace LispIDEdotNet.Utilities
 
         private static int newDocumentCount = 0;
 
-        public static string filter = "Lisp files (*.lisp;*.lsp)|*.lisp;*.lsp|All files (*.*)|*.*";
-        public static string defaultExt = "lsp";
+        private static string filter = "Lisp files (*.lisp;*.lsp)|*.lisp;*.lsp|All files (*.*)|*.*";
+        private static string defaultExt = "lsp";
 
         #endregion Fields
 

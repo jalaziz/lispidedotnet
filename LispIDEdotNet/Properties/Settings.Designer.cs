@@ -46,5 +46,136 @@ namespace LispIDEdotNet.Properties {
                 this["WindowBounds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LispPath {
+            get {
+                return ((string)(this["LispPath"]));
+            }
+            set {
+                this["LispPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Font Font {
+            get {
+                return ((global::System.Drawing.Font)(this["Font"]));
+            }
+            set {
+                this["Font"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Integrated")]
+        public global::LispIDEdotNet.Utilities.PipeType PipeType {
+            get {
+                return ((global::LispIDEdotNet.Utilities.PipeType)(this["PipeType"]));
+            }
+            set {
+                this["PipeType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowToolbar {
+            get {
+                return ((bool)(this["ShowToolbar"]));
+            }
+            set {
+                this["ShowToolbar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowStatusbar {
+            get {
+                return ((bool)(this["ShowStatusbar"]));
+            }
+            set {
+                this["ShowStatusbar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowWhitespace {
+            get {
+                return ((bool)(this["ShowWhitespace"]));
+            }
+            set {
+                this["ShowWhitespace"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowEOL {
+            get {
+                return ((bool)(this["ShowEOL"]));
+            }
+            set {
+                this["ShowEOL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowLineNumbers {
+            get {
+                return ((bool)(this["ShowLineNumbers"]));
+            }
+            set {
+                this["ShowLineNumbers"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableIndentGuides {
+            get {
+                return ((bool)(this["EnableIndentGuides"]));
+            }
+            set {
+                this["EnableIndentGuides"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableFolding {
+            get {
+                return ((bool)(this["EnableFolding"]));
+            }
+            set {
+                this["EnableFolding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableAutocomplete {
+            get {
+                return ((bool)(this["EnableAutocomplete"]));
+            }
+            set {
+                this["EnableAutocomplete"] = value;
+            }
+        }
     }
 }
