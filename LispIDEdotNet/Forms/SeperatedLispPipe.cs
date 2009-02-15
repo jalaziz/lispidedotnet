@@ -68,6 +68,11 @@ namespace LispIDEdotNet.Forms
 
         #region Events
 
+        private void SeperatedLispPipe_Load(object sender, EventArgs e)
+        {
+            scintillaPipe.Focus();
+        }
+
         private void scintillaPipe_SizeChanged(object sender, EventArgs e)
         {
             this.scintillaPipe.Scrolling.HorizontalWidth = this.scintillaPipe.ClientRectangle.Width

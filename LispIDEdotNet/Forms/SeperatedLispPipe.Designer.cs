@@ -33,7 +33,7 @@ namespace LispIDEdotNet.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SeperatedLispPipe));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.scintilla = new ScintillaNet.Scintilla();
-            this.scintillaPipe = new SeperatedScintillaPipe();
+            this.scintillaPipe = new LispIDEdotNet.Components.SeperatedScintillaPipe();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -88,8 +88,7 @@ namespace LispIDEdotNet.Forms
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SeperatedLispPipe";
-            this.TabText = "LispPipe";
-            this.Text = "LispPipe";
+            this.Load += new System.EventHandler(this.SeperatedLispPipe_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);

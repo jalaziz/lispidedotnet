@@ -179,6 +179,9 @@ namespace LispIDEdotNet.Utilities
                 // We should consume any OperationCanceledException from child read here  
                 // so that we don't crash the parent with an unhandled exc
                 byteLen = 0; // Treat this as EOF
+            } catch (Exception)
+            {
+                byteLen = 0;
             }
 
             if (byteLen == 0)

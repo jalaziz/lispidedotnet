@@ -210,7 +210,6 @@ namespace LispIDEdotNet.Forms
         {
             this.Scintilla.IsReadOnly = true;
             this.ScintillaBuffer.BufferReady += new EventHandler(ScintillaBuffer_BufferReady);
-            OpenLisp();
         }
 
         private void LispPipe_FormClosed(object sender, FormClosedEventArgs e)
@@ -232,7 +231,7 @@ namespace LispIDEdotNet.Forms
 
         private void ScintillaBuffer_BufferReady(object sender, EventArgs e)
         {
-            SendCommand(this.ScintillaBuffer.BufferedText);
+            SendCommand(this.ScintillaBuffer.BufferedText + Environment.NewLine);
         }
 
         #endregion Events
