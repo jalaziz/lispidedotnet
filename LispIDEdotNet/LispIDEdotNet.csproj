@@ -198,10 +198,10 @@
     <Content Include="config\lisp.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\CommentRegion.png" />
-    <Content Include="Resources\IndentHS.png" />
-    <Content Include="Resources\OutdentHS.png" />
-    <Content Include="Resources\UnCommentRegion.png" />
+    <None Include="Resources\CommentRegion.png" />
+    <None Include="Resources\IndentHS.png" />
+    <None Include="Resources\OutdentHS.png" />
+    <None Include="Resources\UnCommentRegion.png" />
     <Content Include="SciLexer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
