@@ -28,6 +28,7 @@ namespace LispIDEdotNet.Forms
         public IntegratedLispPipe()
         {
             InitializeComponent();
+            scintilla.IsBraceMatching = true;
         }
 
         #region Methods
@@ -39,6 +40,11 @@ namespace LispIDEdotNet.Forms
             this.Scintilla.EndOfLine.ConvertAllLines(this.Scintilla.EndOfLine.Mode);
             this.Scintilla.CurrentPos = this.Scintilla.TextLength;
             ((IntegratedScintillaPipe)this.Scintilla).OutputStreamMode = false;
+        }
+
+        public override void Configure(ScintillaNet.Configuration.Configuration config)
+        {
+            scintilla.ConfigurationManager.Configure(config);
         }
 
         #endregion Methods

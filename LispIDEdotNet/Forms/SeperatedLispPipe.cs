@@ -29,7 +29,10 @@ namespace LispIDEdotNet.Forms
         public SeperatedLispPipe()
         {
             InitializeComponent();
-            this.scintillaPipe.SizeChanged += new EventHandler(scintillaPipe_SizeChanged);
+            scintillaPipe.SizeChanged += new EventHandler(scintillaPipe_SizeChanged);
+            scintilla.IsBraceMatching = true;
+            scintillaPipe.IsBraceMatching = true;
+            scintillaPipe.LineWrap.Mode = WrapMode.None;
         }
 
         #region Methods
@@ -53,6 +56,12 @@ namespace LispIDEdotNet.Forms
 
             if (height > this.splitContainer1.Panel1MinSize)
                 this.splitContainer1.SplitterDistance = height;
+        }
+
+        public override void Configure(ScintillaNet.Configuration.Configuration config)
+        {
+            scintilla.ConfigurationManager.Configure(config);
+            scintillaPipe.ConfigurationManager.Configure(config);
         }
 
         #endregion Methods

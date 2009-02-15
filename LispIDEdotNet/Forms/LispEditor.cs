@@ -108,7 +108,7 @@ namespace LispIDEdotNet.Forms
 
         private void scintilla_CharAdded(object sender, CharAddedEventArgs e)
         {
-            if (e.Ch == '(')
+            if (e.Ch == '(' && ConfigurationManager.EnableAutocomplete)
                 this.Scintilla.AutoComplete.Show();
         }
 

@@ -64,7 +64,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScintillaNet, Version=2.0.3329.43113, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
+    <Reference Include="ScintillaNet, Version=2.0.3333.4117, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -105,10 +105,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utilities\ConfigurationManager.cs" />
+    <Compile Include="Utilities\Configuration\GeneralSettings.cs" />
     <Compile Include="Utilities\Configuration\LispIDEConfigSection.cs" />
     <Compile Include="Utilities\Configuration\OpenDocumentElement.cs" />
     <Compile Include="Utilities\Configuration\OpenDocumentsCollection.cs" />
+    <Compile Include="Utilities\Configuration\PipeSettings.cs" />
     <Compile Include="Utilities\Configuration\RecentFiles.cs" />
+    <Compile Include="Utilities\Configuration\ScintillaSettings.cs" />
     <Compile Include="Utilities\Enums.cs" />
     <Compile Include="Utilities\FileCommands.cs" />
     <Compile Include="Utilities\ScintillaConfigurationManager.cs" />
@@ -210,7 +213,7 @@
     <None Include="Resources\new_document_lined_16.ico" />
     <None Include="Resources\resetlisp.bmp" />
     <None Include="Resources\sendtolisp.bmp" />
-    <Content Include="ScintillaNet.XML" />
+    <None Include="ScintillaNet.XML" />
     <Content Include="ScintillaNetLicense.rtf" />
   </ItemGroup>
   <ItemGroup>

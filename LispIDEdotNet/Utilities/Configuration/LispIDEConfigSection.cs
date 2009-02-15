@@ -20,8 +20,9 @@ namespace LispIDEdotNet.Utilities.Configuration
 
         private static ConfigurationProperty recentFilesProperty;
         private static ConfigurationProperty openDocumentsProperty;
-        private static ConfigurationProperty settingsProperty;
+        private static ConfigurationProperty generalProperty;
         private static ConfigurationProperty scintillaProperty;
+        private static ConfigurationProperty pipeProperty;
 
         private static ConfigurationPropertyCollection properties;
 
@@ -40,10 +41,19 @@ namespace LispIDEdotNet.Utilities.Configuration
                                                             ConfigurationPropertyOptions.IsRequired);
             openDocumentsProperty = new ConfigurationProperty("OpenDocuments", typeof(OpenDocumentsCollection), null,
                                                               ConfigurationPropertyOptions.IsDefaultCollection);
+            generalProperty = new ConfigurationProperty("General", typeof(GeneralSettings), null,
+                                                                ConfigurationPropertyOptions.IsRequired);
+            scintillaProperty = new ConfigurationProperty("Scintilla", typeof(ScintillaSettings), null,
+                                                                ConfigurationPropertyOptions.IsRequired);
+            pipeProperty = new ConfigurationProperty("Pipe", typeof(PipeSettings), null,
+                                                                ConfigurationPropertyOptions.IsRequired);
 
             properties = new ConfigurationPropertyCollection();
             properties.Add(recentFilesProperty);
             properties.Add(openDocumentsProperty);
+            properties.Add(generalProperty);
+            properties.Add(scintillaProperty);
+            properties.Add(pipeProperty);
         }
 
         #endregion Constructors
@@ -60,6 +70,24 @@ namespace LispIDEdotNet.Utilities.Configuration
         public OpenDocumentsCollection OpenDocuments
         {
             get { return (OpenDocumentsCollection)base[openDocumentsProperty]; }
+        }
+
+        [ConfigurationProperty("General", IsRequired = true)]
+        public GeneralSettings General
+        {
+            get { return (GeneralSettings)base[generalProperty]; }
+        }
+
+        [ConfigurationProperty("Scintilla", IsRequired = true)]
+        public ScintillaSettings Scintilla
+        {
+            get { return (ScintillaSettings)base[scintillaProperty]; }
+        }
+
+        [ConfigurationProperty("Pipe", IsRequired = true)]
+        public PipeSettings Pipe
+        {
+            get { return (PipeSettings)base[pipeProperty]; }
         }
 
         protected override ConfigurationPropertyCollection Properties

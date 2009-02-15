@@ -47,23 +47,6 @@ namespace LispIDEdotNet.Forms
 
             this.scintillaConfig = new ScintillaConfigurationManager();
 
-            this.lispPipe = new IntegratedLispPipe();
-            this.lispPipe.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.PipeScintillaConfiguration);
-            this.lispPipe.Scintilla.IsBraceMatching = true;
-            this.lispPipe.Show(this.dockPanel1, DockState.DockBottom);
-            this.lispPipe.LispPath = @"C:\GCL-ANSI\bin\gcl1.bat";
-
-            SeperatedLispPipe slp = new SeperatedLispPipe();
-            slp.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.PipeScintillaConfiguration);
-            slp.Scintilla.IsBraceMatching = true;
-            slp.ScintillaBuffer.ConfigurationManager.Configure(this.scintillaConfig.PipeScintillaConfiguration);
-            slp.ScintillaBuffer.IsBraceMatching = true;
-            slp.ScintillaBuffer.LineWrap.Mode = WrapMode.None;
-            slp.Show(this.dockPanel1, DockState.DockBottom);
-            slp.LispPath = @"C:\GCL-ANSI\bin\gcl1.bat";
-
-            this.statusStatusLabel.Text = "Ready";
-
             //For some reason, enter is not available in the form designer
             this.sendToLispToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Enter;
             this.macroexpandToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.Enter;
@@ -77,6 +60,8 @@ namespace LispIDEdotNet.Forms
             bool showRecentFiles = (ConfigurationManager.RecentFiles.FileList.Count > 0);
             recentFilesToolStripMenuItem.Visible = showRecentFiles;
             recentFilesToolstripSeperator.Visible = showRecentFiles;
+
+            LoadConfiguration();
         }
 
         #region Recent File Events
@@ -440,37 +425,6 @@ namespace LispIDEdotNet.Forms
 
         #endregion Help Menu Events
 
-        #region Command Events
-
-        private void resetLispToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.lispPipe.StartLisp();
-        }
-
-        private void macroexpandToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.ActiveDocument == null)
-                return;
-
-            string pipetext = this.ActiveDocument.GetPipeString();
-
-            if (!String.IsNullOrEmpty(pipetext))
-                this.lispPipe.SendCommand("(pprint (macroexpand-1 '" + pipetext + "))");
-        }
-
-        private void sendToLispToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.ActiveDocument == null)
-                return;
-
-            string pipetext = this.ActiveDocument.GetPipeString();
-
-            if (!String.IsNullOrEmpty(pipetext))
-                this.lispPipe.SendCommand(pipetext);
-        }
-
-        #endregion Command Events
-
         #region StatusBar Events
 
         private void macEOLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -519,6 +473,7 @@ namespace LispIDEdotNet.Forms
         {
             ConfigurationManager.SaveWindowState(this);
             SaveOpenDocuments();
+            ConfigurationManager.Save();
         }
 
         private void dockPanel1_ActiveDocumentChanged(object sender, EventArgs e)
@@ -568,21 +523,33 @@ namespace LispIDEdotNet.Forms
 
         #endregion Main Form Events
 
-        #region Scintilla Events
-
-        private void Scintilla_DocumentChange(object sender, NativeScintillaEventArgs e)
-        {
-            SetStatusLabels();
-        }
-
-        private void Scintilla_SelectionChanged(object sender, EventArgs e)
-        {
-            SetStatusLabels();
-        }
-
-        #endregion Scintilla Events
-
         #region Methods
+
+        private void LoadConfiguration()
+        {
+            if(!ConfigurationManager.ShowStatusbar)
+            {
+                statusBarToolStripMenuItem.Checked = false;
+                statusStrip1.Visible = false;
+            }
+
+            if(!ConfigurationManager.ShowToolbar)
+            {
+                toolbarToolStripMenuItem.Checked = false;
+                lispToolStrip.Visible = false;
+                standardToolStrip.Visible = false;
+            }
+
+            autocompleteToolStripMenuItem.Checked = ConfigurationManager.EnableAutocomplete;
+            foldingToolStripMenuItem1.Checked = ConfigurationManager.EnableFolding;
+            wordWrapToolStripMenuItem.Checked = ConfigurationManager.EnableWordWrap;
+            indentGuideToolStripMenuItem.Checked = ConfigurationManager.EnableIndentGuides;
+            whitespaceToolStripMenuItem.Checked = ConfigurationManager.ShowWhitespace;
+            endOfLineToolStripMenuItem.Checked = ConfigurationManager.ShowEOL;
+            lineNumbersToolStripMenuItem.Checked = ConfigurationManager.ShowLineNumbers;
+            
+            SetLispPipeType(ConfigurationManager.PipeType);
+        }
 
         private void SaveOpenDocuments()
         {
@@ -599,8 +566,6 @@ namespace LispIDEdotNet.Forms
                     ConfigurationManager.OpenDocuments.Add(doc);
                 }
             }
-
-            ConfigurationManager.Save();
         }
 
         private void LoadOpenDocuments()
@@ -618,15 +583,41 @@ namespace LispIDEdotNet.Forms
             if(editor == null)
                 return;
 
-            editor.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.ScintillaConfiguration);
-            editor.Scintilla.IsBraceMatching = true;
             editor.Show(this.dockPanel1, dockState);
             SetStatusLabels();
+        }
+
+        private void SetupEditor(LispEditor editor)
+        {
+            if (editor == null)
+                return;
+
+            editor.Scintilla.ConfigurationManager.Configure(this.scintillaConfig.ScintillaConfiguration);
+            editor.Scintilla.IsBraceMatching = true;
+
+            editor.Scintilla.Folding.IsEnabled = ConfigurationManager.EnableFolding;
+            editor.Scintilla.Margins[0].Width = ConfigurationManager.ShowLineNumbers ? 35 : 0;
+            editor.Scintilla.EndOfLine.IsVisible = ConfigurationManager.ShowEOL;
+            editor.Scintilla.Whitespace.Mode = ConfigurationManager.ShowWhitespace
+                                                   ? WhitespaceMode.VisibleAlways
+                                                   : WhitespaceMode.Invisible;
+            editor.Scintilla.LineWrap.Mode = ConfigurationManager.EnableWordWrap ? WrapMode.Word : WrapMode.None;
+            editor.Scintilla.Indentation.Guides = ConfigurationManager.EnableIndentGuides
+                                                      ? IndentGuideView.LookForward
+                                                      : IndentGuideView.None;
+
+            if(ConfigurationManager.Font != null)
+            {
+                editor.Scintilla.UseFont = true;
+                editor.Scintilla.Font = ConfigurationManager.Font;
+                editor.Scintilla.Styles[32].Font = ConfigurationManager.Font;
+            }
         }
 
         private void NewFile()
         {
             LispEditor editor = FileCommands.NewFile();
+            SetupEditor(editor);
             ShowEditor(editor, DockState.Document);
         }
 
@@ -654,6 +645,7 @@ namespace LispIDEdotNet.Forms
 
                 if (editor != null)
                 {
+                    SetupEditor(editor);
                     ShowEditor(editor, dockState);
                 }
             }
@@ -701,7 +693,7 @@ namespace LispIDEdotNet.Forms
             string info;
             string eol = String.Empty;
 
-            if(this.ActiveDocument != null)
+            if (this.ActiveDocument != null)
             {
                 Range selRange = this.ActiveDocument.Scintilla.Selection.Range;
 
@@ -730,8 +722,7 @@ namespace LispIDEdotNet.Forms
                         this.dosEOLToolStripMenuItem.Checked = true;
                         break;
                 }
-            }
-            else
+            } else
             {
                 length = "Len: 0";
                 info = "Ln: 0  Col: 0  Sel: 0";
@@ -753,7 +744,7 @@ namespace LispIDEdotNet.Forms
             this.saveAsToolStripMenuItem.Enabled = enabled;
             this.saveAllToolStripButton.Enabled = enabled;
             this.saveAllToolStripMenuItem.Enabled = enabled;
-            
+
             this.cutToolStripButton.Enabled = enabled;
             this.cutToolStripMenuItem.Enabled = enabled;
             this.copyToolStripButton.Enabled = enabled;
@@ -779,6 +770,14 @@ namespace LispIDEdotNet.Forms
             this.goToToolStripMenuItem.Enabled = enabled;
             this.bookmarksToolStripMenuItem.Enabled = enabled;
             this.advancedToolStripMenuItem.Enabled = enabled;
+            this.foldingToolStripMenuItem.Enabled = enabled;
+
+            this.zoomInToolStripMenuItem.Enabled = enabled;
+            this.zoomOutToolStripMenuItem.Enabled = enabled;
+            this.resetZoomToolStripMenuItem.Enabled = enabled;
+
+            this.navigateForwardToolStripMenuItem.Enabled = enabled;
+            this.navigateBackwardToolStripMenuItem.Enabled = enabled;
 
             this.closeToolStripMenuItem.Enabled = enabled;
             this.closeAllToolStripMenuItem.Enabled = enabled;
@@ -788,6 +787,23 @@ namespace LispIDEdotNet.Forms
 
         #endregion Methods
 
+        #region Scintilla
+
+        private void Scintilla_DocumentChange(object sender, NativeScintillaEventArgs e)
+        {
+            SetStatusLabels();
+        }
+
+        private void Scintilla_SelectionChanged(object sender, EventArgs e)
+        {
+            SetStatusLabels();
+        }
+
+        private void autocompleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurationManager.EnableAutocomplete = autocompleteToolStripMenuItem.Checked;
+        }
+
         private void fontToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FontDialog fd = new FontDialog();
@@ -796,13 +812,63 @@ namespace LispIDEdotNet.Forms
             fd.ShowColor = false;
             fd.ShowHelp = false;
             fd.ShowEffects = false;
+            fd.ShowApply = true;
+            fd.Font = ConfigurationManager.Font ?? this.ActiveDocument.Scintilla.Styles[0].Font;
             fd.Apply += new EventHandler(fontDialog_Apply);
-            fd.ShowDialog(this);
+
+            if(fd.ShowDialog(this) == DialogResult.OK)
+            {
+                ConfigurationManager.Font = fd.Font;
+                SetFont(fd.Font);
+            }
         }
 
         private void fontDialog_Apply(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            ConfigurationManager.Font = ((FontDialog)sender).Font;
+            SetFont(((FontDialog)sender).Font);
+            return;
+        }
+
+        private void SetFont(Font font)
+        {
+            foreach (LispEditor editor in this.dockPanel1.Documents)
+            {
+                editor.Scintilla.UseFont = true;
+                editor.Scintilla.Font = font;
+                editor.Scintilla.Styles[32].Font = font;
+            }
+        }
+
+        #endregion Scintilla
+
+        #region Lisp Pipe
+
+        private void resetLispToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartLisp();
+        }
+
+        private void macroexpandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveDocument == null)
+                return;
+
+            string pipetext = this.ActiveDocument.GetPipeString();
+
+            if (!String.IsNullOrEmpty(pipetext))
+                this.lispPipe.SendCommand("(pprint (macroexpand-1 '" + pipetext + "))");
+        }
+
+        private void sendToLispToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveDocument == null)
+                return;
+
+            string pipetext = this.ActiveDocument.GetPipeString();
+
+            if (!String.IsNullOrEmpty(pipetext))
+                this.lispPipe.SendCommand(pipetext);
         }
 
         private void lispPathToolStripMenuItem_Click(object sender, EventArgs e)
@@ -810,7 +876,142 @@ namespace LispIDEdotNet.Forms
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Select Lisp Path";
             ofd.Filter = "Lisp startup file (*.exe;*.bat;*.cmd)|*.exe;*.bat;*.cmd";
-            ofd.ShowDialog(this);
+
+            if(ofd.ShowDialog(this) == DialogResult.OK)
+            {
+                ConfigurationManager.LispPath = ofd.FileName;
+                lispPipe.LispPath = ofd.FileName;
+                StartLisp();
+            }
         }
+
+        private void integratedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetLispPipeType(PipeType.Integrated);
+        }
+
+        private void seperatedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetLispPipeType(PipeType.Seperated);
+        }
+
+        private void SetLispPipeType(PipeType type)
+        {
+            integratedToolStripMenuItem.Checked = false;
+            seperatedToolStripMenuItem.Checked = false;
+
+            if (lispPipe != null)
+            {
+                lispPipe.Close();
+            }
+
+            switch (type)
+            {
+                case PipeType.Seperated:
+                    seperatedToolStripMenuItem.Checked = true;
+                    lispPipe = new SeperatedLispPipe();
+                    break;
+                default:
+                    integratedToolStripMenuItem.Checked = true;
+                    lispPipe = new IntegratedLispPipe();
+                    break;
+            }
+
+            lispPipe.LispPath = ConfigurationManager.LispPath;
+            lispPipe.Configure(this.scintillaConfig.PipeScintillaConfiguration);
+            lispPipe.Show(this.dockPanel1, DockState.DockBottom);
+            StartLisp();
+
+            ConfigurationManager.PipeType = type;
+        }
+
+        private void StartLisp()
+        {
+            try
+            {
+                lispPipe.StartLisp();
+                this.statusStatusLabel.Text = "Ready";
+            } catch (NullReferenceException)
+            {
+                this.statusStatusLabel.Text = "Set Lisp Path";
+            } catch (Exception)
+            {
+                this.statusStatusLabel.Text = "Error";
+            }
+        }
+
+        #endregion Lisp Pipe
+
+        #region Folding
+
+        private void foldingToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool enabled = foldingToolStripMenuItem1.Checked;
+
+            ConfigurationManager.EnableFolding = enabled;
+
+            foreach (LispEditor editor in dockPanel1.Documents)
+            {
+                editor.Scintilla.Folding.IsEnabled = enabled;
+            }
+        }
+
+        private void foldToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null && activeDocument.Scintilla.Lines.Current.FoldExpanded)
+                ActiveDocument.Scintilla.Lines.Current.ToggleFoldExpanded();
+        }
+
+        private void expandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null && !activeDocument.Scintilla.Lines.Current.FoldExpanded)
+                ActiveDocument.Scintilla.Lines.Current.ToggleFoldExpanded();
+        }
+
+        private void foldAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FoldAll(true);
+        }
+
+        private void exapndAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FoldAll(false);
+        }
+
+        private void FoldAll(bool fold)
+        {
+            if (ActiveDocument != null)
+            {
+                ActiveDocument.Scintilla.Lexing.Colorize();
+
+                int lines = ActiveDocument.Scintilla.Lines.Count;
+
+                for (int i = 0; i < lines; i++)
+                {
+                    Line currLine = ActiveDocument.Scintilla.Lines[i];
+
+                    if (currLine.IsFoldPoint)
+                    {
+                        currLine.FoldExpanded = fold ? false : true;
+                    }
+                }
+
+                for (int i = 0; i < lines; i++)
+                {
+                    Line currLine = ActiveDocument.Scintilla.Lines[i];
+                    if (currLine.IsFoldPoint && currLine.FoldLevel == Constants.SC_FOLDLEVELBASE)
+                    {
+                        Line lastLine = currLine.GetLastFoldChild();
+
+                        if(fold)
+                            ActiveDocument.Scintilla.Lines.Hide(i+1, lastLine.Number);
+                        else
+                            ActiveDocument.Scintilla.Lines.Show(i + 1, lastLine.Number);
+                    }
+                }
+            }
+        }
+
+        #endregion Folding
     }
 }

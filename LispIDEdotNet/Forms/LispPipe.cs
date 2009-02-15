@@ -101,7 +101,7 @@ namespace LispIDEdotNet.Forms
 
             if(String.IsNullOrEmpty(this.LispPath))
             {
-                return;
+                throw new NullReferenceException("The Lisp Path cannot be empty or null.");
             }
 
             this.Scintilla.Text = String.Empty;
@@ -136,6 +136,8 @@ namespace LispIDEdotNet.Forms
             {
                 this.Scintilla.InsertText("\r\nError starting REPL process.\r\n");
                 this.Scintilla.InsertText(e.Message);
+
+                throw e;
             }
         }
 
@@ -155,6 +157,11 @@ namespace LispIDEdotNet.Forms
             this.lispProcess.Close();
             this.lispProcess.Exited -= lispProcess_Exited;
             this.lispProcess.ErrorDataReceived -= lispProcess_ErrorDataReceived;
+        }
+
+        public virtual void Configure(ScintillaNet.Configuration.Configuration config)
+        {
+            return;
         }
 
         // This method is used for making thread-safe
