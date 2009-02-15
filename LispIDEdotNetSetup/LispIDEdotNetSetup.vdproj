@@ -93,11 +93,6 @@
                     "Name" = "8:.NET Framework Client Profile"
                     "ProductCode" = "8:Microsoft.Net.Client.3.5"
                     }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
-                    {
-                    "Name" = "8:.NET Framework 3.5 SP1"
-                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
-                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
                     "Name" = "8:Windows Installer 3.1"
@@ -301,7 +296,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
         "ProductCode" = "8:{A5F085C6-3B87-4A5D-B7BF-F8C1360B8A9E}"
-        "PackageCode" = "8:{62D3F590-F544-4D9F-BBC1-DA12DB655338}"
+        "PackageCode" = "8:{7F18FFDA-7CAF-4E83-8618-5FC767641356}"
         "UpgradeCode" = "8:{098C7287-F08E-46A5-BE2B-406C5B56056A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
