@@ -206,7 +206,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ScintillaNet, Version=2.0.3324.23684, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ScintillaNet, Version=2.0.3333.4117, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_F2E9CBF415BA8C2886755515F47276F5"
@@ -300,14 +300,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{5AA57575-029E-40D1-9058-C4E0A5339B7A}"
-        "PackageCode" = "8:{241A8D21-D891-4DB1-A73C-A29BB56D741B}"
+        "ProductCode" = "8:{A5F085C6-3B87-4A5D-B7BF-F8C1360B8A9E}"
+        "PackageCode" = "8:{62D3F590-F544-4D9F-BBC1-DA12DB655338}"
         "UpgradeCode" = "8:{098C7287-F08E-46A5-BE2B-406C5B56056A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.4"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -863,7 +863,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_71E9C9FB6EF74131AFB2AB864404991A"
             {
-            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Release\\LispIDE.Net.exe"
+            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Debug\\LispIDE.Net.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
@@ -948,7 +948,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FC7FA0C77EF54480BABDA0C34979D222"
             {
-            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
+            "SourcePath" = "8:..\\Uninstall\\obj\\Debug\\Uninstall.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
