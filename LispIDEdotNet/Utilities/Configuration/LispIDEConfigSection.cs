@@ -13,6 +13,8 @@ namespace LispIDEdotNet.Utilities.Configuration
         #region Fields
 
         private System.Configuration.Configuration config;
+        private ConfigurationUserLevel configLevel;
+        private object _lock = new object();
 
         #endregion Fields
 
@@ -98,14 +100,63 @@ namespace LispIDEdotNet.Utilities.Configuration
             }
         }
 
+        public ConfigurationUserLevel ConfigLevel
+        {
+            get { return configLevel; }
+        }
+
         #endregion Properties
 
         #region Methods
 
         public void Save()
         {
-            if(config != null)
-                config.Save();
+            InternalSave(true);
+        }
+
+        private void InternalSave(bool external)
+        {
+            lock (_lock)
+            {
+                if (config != null)
+                {
+                    try
+                    {
+                        config.Save();
+                    } catch (Exception)
+                    {
+                        /* If the config file was externally modified, we have to load the configuration file
+                         * and merge the changes. Instead of merging, we'll just concern ourselves with the last 
+                         * closed instance of the application. This is not the most elegant solution
+                         * but it seems to work. Unfortunately, the save method throws the same exception for 
+                         * an externally modified file and an unavailable or locked file. Therefore, we must
+                         * make sure we don't end up in an infinite loop. So, we use the external flag to determine
+                         * if the call to save was internal (and therefore the second iteration) or external.
+                         */
+
+                        try
+                        {
+                            if (!external)
+                                throw;
+
+                            LispIDEConfigSection configSection = GetSection(this.ConfigLevel);
+
+                            foreach (ConfigurationProperty property in this.Properties)
+                            {
+                                configSection[property.Name] = this[property];
+                            }
+
+                            configSection.InternalSave(false);
+
+                            this.ResetModified();
+                        } catch (Exception)
+                        {
+                            MessageBox.Show("There was an error saving the configuration file.", "Configuration Save Error",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
         }
 
         #endregion Methods
@@ -138,6 +189,7 @@ namespace LispIDEdotNet.Utilities.Configuration
                 config.Sections.Add("LispIDEConfig", configSection);
             }
             configSection.config = config;
+            configSection.configLevel = configLevel;
 
             return configSection;
         }

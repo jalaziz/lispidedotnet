@@ -105,6 +105,9 @@
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lispPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            this.autocompleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.foldingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.lispPipeTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.integratedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seperatedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,9 +152,6 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.autocompleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.foldingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.SuspendLayout();
             this.standardMenuStrip.SuspendLayout();
             this.standardToolStrip.SuspendLayout();
@@ -494,28 +494,28 @@
             // foldToolStripMenuItem
             // 
             this.foldToolStripMenuItem.Name = "foldToolStripMenuItem";
-            this.foldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.foldToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.foldToolStripMenuItem.Text = "&Fold";
             this.foldToolStripMenuItem.Click += new System.EventHandler(this.foldToolStripMenuItem_Click);
             // 
             // foldAllToolStripMenuItem
             // 
             this.foldAllToolStripMenuItem.Name = "foldAllToolStripMenuItem";
-            this.foldAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.foldAllToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.foldAllToolStripMenuItem.Text = "Fold &All";
             this.foldAllToolStripMenuItem.Click += new System.EventHandler(this.foldAllToolStripMenuItem_Click);
             // 
             // expandToolStripMenuItem
             // 
             this.expandToolStripMenuItem.Name = "expandToolStripMenuItem";
-            this.expandToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.expandToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.expandToolStripMenuItem.Text = "&Expand";
             this.expandToolStripMenuItem.Click += new System.EventHandler(this.expandToolStripMenuItem_Click);
             // 
             // exapndAllToolStripMenuItem
             // 
             this.exapndAllToolStripMenuItem.Name = "exapndAllToolStripMenuItem";
-            this.exapndAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exapndAllToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.exapndAllToolStripMenuItem.Text = "Expand A&ll";
             this.exapndAllToolStripMenuItem.Click += new System.EventHandler(this.exapndAllToolStripMenuItem_Click);
             // 
@@ -751,14 +751,14 @@
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.closeAllToolStripMenuItem.Text = "C&lose All";
             this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.closeAllToolStripMenuItem_Click);
             // 
@@ -779,21 +779,46 @@
             // fontToolStripMenuItem
             // 
             this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.fontToolStripMenuItem.Text = "&Font";
             this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
             // 
             // lispPathToolStripMenuItem
             // 
             this.lispPathToolStripMenuItem.Name = "lispPathToolStripMenuItem";
-            this.lispPathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lispPathToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.lispPathToolStripMenuItem.Text = "Lisp &Path";
             this.lispPathToolStripMenuItem.Click += new System.EventHandler(this.lispPathToolStripMenuItem_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(147, 6);
+            // 
+            // autocompleteToolStripMenuItem
+            // 
+            this.autocompleteToolStripMenuItem.Checked = true;
+            this.autocompleteToolStripMenuItem.CheckOnClick = true;
+            this.autocompleteToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.autocompleteToolStripMenuItem.Name = "autocompleteToolStripMenuItem";
+            this.autocompleteToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.autocompleteToolStripMenuItem.Text = "&Autocomplete";
+            this.autocompleteToolStripMenuItem.Click += new System.EventHandler(this.autocompleteToolStripMenuItem_Click);
+            // 
+            // foldingToolStripMenuItem1
+            // 
+            this.foldingToolStripMenuItem1.Checked = true;
+            this.foldingToolStripMenuItem1.CheckOnClick = true;
+            this.foldingToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.foldingToolStripMenuItem1.Name = "foldingToolStripMenuItem1";
+            this.foldingToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
+            this.foldingToolStripMenuItem1.Text = "F&olding";
+            this.foldingToolStripMenuItem1.Click += new System.EventHandler(this.foldingToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(147, 6);
             // 
             // lispPipeTypeToolStripMenuItem
             // 
@@ -801,20 +826,20 @@
             this.integratedToolStripMenuItem,
             this.seperatedToolStripMenuItem});
             this.lispPipeTypeToolStripMenuItem.Name = "lispPipeTypeToolStripMenuItem";
-            this.lispPipeTypeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lispPipeTypeToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.lispPipeTypeToolStripMenuItem.Text = "Lisp Pipe &Type";
             // 
             // integratedToolStripMenuItem
             // 
             this.integratedToolStripMenuItem.Name = "integratedToolStripMenuItem";
-            this.integratedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.integratedToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.integratedToolStripMenuItem.Text = "Integrated";
             this.integratedToolStripMenuItem.Click += new System.EventHandler(this.integratedToolStripMenuItem_Click);
             // 
             // seperatedToolStripMenuItem
             // 
             this.seperatedToolStripMenuItem.Name = "seperatedToolStripMenuItem";
-            this.seperatedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.seperatedToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.seperatedToolStripMenuItem.Text = "Seperated";
             this.seperatedToolStripMenuItem.Click += new System.EventHandler(this.seperatedToolStripMenuItem_Click);
             // 
@@ -1167,12 +1192,16 @@
             // dockPanel1
             // 
             this.dockPanel1.ActiveAutoHideContent = null;
+            this.dockPanel1.AllowDrop = true;
             this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockPanel1.Location = new System.Drawing.Point(0, 49);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new System.Drawing.Size(1012, 663);
             this.dockPanel1.TabIndex = 1;
+            this.dockPanel1.DragOver += new System.Windows.Forms.DragEventHandler(this.dockPanel1_DragOver);
+            this.dockPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.dockPanel1_DragDrop);
             this.dockPanel1.ActiveDocumentChanged += new System.EventHandler(this.dockPanel1_ActiveDocumentChanged);
+            this.dockPanel1.GiveFeedback += new System.Windows.Forms.GiveFeedbackEventHandler(this.dockPanel1_GiveFeedback);
             // 
             // toolStripButton1
             // 
@@ -1189,33 +1218,9 @@
             this.toolStripSeparator17.Name = "toolStripSeparator17";
             this.toolStripSeparator17.Size = new System.Drawing.Size(6, 6);
             // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(149, 6);
-            // 
-            // autocompleteToolStripMenuItem
-            // 
-            this.autocompleteToolStripMenuItem.Checked = true;
-            this.autocompleteToolStripMenuItem.CheckOnClick = true;
-            this.autocompleteToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.autocompleteToolStripMenuItem.Name = "autocompleteToolStripMenuItem";
-            this.autocompleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.autocompleteToolStripMenuItem.Text = "&Autocomplete";
-            this.autocompleteToolStripMenuItem.Click += new System.EventHandler(this.autocompleteToolStripMenuItem_Click);
-            // 
-            // foldingToolStripMenuItem1
-            // 
-            this.foldingToolStripMenuItem1.Checked = true;
-            this.foldingToolStripMenuItem1.CheckOnClick = true;
-            this.foldingToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.foldingToolStripMenuItem1.Name = "foldingToolStripMenuItem1";
-            this.foldingToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.foldingToolStripMenuItem1.Text = "F&olding";
-            this.foldingToolStripMenuItem1.Click += new System.EventHandler(this.foldingToolStripMenuItem1_Click);
-            // 
             // LispIDEForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 736);
@@ -1228,7 +1233,9 @@
             this.Name = "LispIDEForm";
             this.Text = "LispIDE.Net";
             this.Load += new System.EventHandler(this.LispIDEForm_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.LispIDEForm_DragDrop);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LispIDEForm_FormClosing);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.LispIDEForm_DragOver);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             this.standardMenuStrip.ResumeLayout(false);

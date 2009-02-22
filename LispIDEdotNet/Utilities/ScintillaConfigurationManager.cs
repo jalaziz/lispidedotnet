@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using ScintillaNet.Configuration;
 
 namespace LispIDEdotNet.Utilities
@@ -12,14 +13,14 @@ namespace LispIDEdotNet.Utilities
     {
         #region Fields
 
-        private const string CONFIG_FOLDER = "config";
         private const string LISP_CONFIG = "lisp.xml";
         private const string PIPE_CONFIG = "lispPipe.xml";
         private const string CONFIG_DOCUMENT = "config.xml";
 
-        private readonly string LISP_CONFIG_PATH = Path.Combine(CONFIG_FOLDER, LISP_CONFIG);
-        private readonly string LISP_PIPE_CONFIG_PATH = Path.Combine(CONFIG_FOLDER, PIPE_CONFIG);
-        private readonly string CONFIG_DOCUMENT_PATH = Path.Combine(CONFIG_FOLDER, CONFIG_DOCUMENT);
+        private readonly string CONFIG_FOLDER;
+        private readonly string LISP_CONFIG_PATH;
+        private readonly string LISP_PIPE_CONFIG_PATH;
+        private readonly string CONFIG_DOCUMENT_PATH;
 
         private string lispConfigPath;
         private string lispPipeConfigPath;
@@ -92,6 +93,11 @@ namespace LispIDEdotNet.Utilities
 
         public ScintillaConfigurationManager()
         {
+            CONFIG_FOLDER = Path.Combine(Application.StartupPath, "config");
+            LISP_CONFIG_PATH = Path.Combine(CONFIG_FOLDER, LISP_CONFIG);
+            LISP_PIPE_CONFIG_PATH = Path.Combine(CONFIG_FOLDER, PIPE_CONFIG);
+            CONFIG_DOCUMENT_PATH = Path.Combine(CONFIG_FOLDER, CONFIG_DOCUMENT);
+
             LoadScintillaConfiguration();
             LoadPipeScintillaConfiguration();
 

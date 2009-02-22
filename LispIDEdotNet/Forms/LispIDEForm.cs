@@ -2,6 +2,8 @@
 using System.Configuration;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using LispIDEdotNet.Utilities;
 using LispIDEdotNet.Utilities.Configuration;
@@ -465,7 +467,16 @@ namespace LispIDEdotNet.Forms
         {
             this.Text = Program.Title;
             this.aboutToolStripMenuItem.Text = String.Format(CultureInfo.CurrentCulture, "&About {0}...", Program.Title);
+
             LoadOpenDocuments();
+
+            string[] args = Environment.GetCommandLineArgs();
+
+            for (int i = 1; i < args.Length && !String.IsNullOrEmpty(Path.GetFileName(args[i])); i++)
+            {
+                OpenFile(args[i]);
+            }
+            
             ConfigurationManager.LoadWindowState(this);
         }
 
@@ -1013,5 +1024,32 @@ namespace LispIDEdotNet.Forms
         }
 
         #endregion Folding
+
+        private void dockPanel1_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void dockPanel1_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+
+        }
+
+        private void dockPanel1_DragOver(object sender, DragEventArgs e)
+        {
+            e.Data.GetFormats();
+            object filedrop = e.Data.GetData(DataFormats.FileDrop);
+        }
+
+        private void LispIDEForm_DragOver(object sender, DragEventArgs e)
+        {
+            e.Data.GetFormats();
+            object filedrop = e.Data.GetData(DataFormats.FileDrop);
+        }
+
+        private void LispIDEForm_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
     }
 }
