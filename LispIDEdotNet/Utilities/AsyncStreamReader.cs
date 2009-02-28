@@ -158,7 +158,7 @@ namespace LispIDEdotNet.Utilities
         // This is the async callback function. Only one thread could/should call this.
         private void ReadBuffer(IAsyncResult ar)
         {
-            if(this.stream == null)
+           if(this.stream == null)
                 return;
             
             int byteLen;
@@ -211,7 +211,10 @@ namespace LispIDEdotNet.Utilities
                 int charLen = this.decoder.GetChars(this.byteBuffer, 0, byteLen, this.charBuffer, 0);
                 this.sb.Append(this.charBuffer, 0, charLen);
                 GetTextFromStringBuilder();
-                this.stream.BeginRead(this.byteBuffer, 0, this.byteBuffer.Length, new AsyncCallback(ReadBuffer), null);
+
+                // The user could've requested to close the reader on callback
+                if(!(this.cancelOperation || this.stream == null))
+                    this.stream.BeginRead(this.byteBuffer, 0, this.byteBuffer.Length, new AsyncCallback(ReadBuffer), null);
             }
         }
 

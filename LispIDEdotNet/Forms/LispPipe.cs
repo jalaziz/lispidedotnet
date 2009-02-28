@@ -85,7 +85,7 @@ namespace LispIDEdotNet.Forms
         {
             if (this.stdInWriter != null)
             {
-                this.stdInWriter.Write(text);
+                this.stdInWriter.Write(text + Environment.NewLine);
                 this.stdInWriter.Flush();
                 //this.carryNewLine = true;
             }
@@ -156,11 +156,26 @@ namespace LispIDEdotNet.Forms
             }
 
             this.lispProcess.CancelErrorRead();
-            
-            this.lispProcess.Close();
             this.lispProcess.Exited -= lispProcess_Exited;
             this.lispProcess.ErrorDataReceived -= lispProcess_ErrorDataReceived;
+            
+            // We need to close the process if it hasn't exited
+            if (!this.lispProcess.HasExited)
+            {
+                // Try and close the process cleanly
+                this.SendCommand("(quit)" + Environment.NewLine + "(bye)" + Environment.NewLine + "(exit)" + Environment.NewLine);
 
+                // If that didnt work, force kill the process
+                // Note: GCL (and possibly other REPLs) run off a .bat file. Killing the process
+                // only kills the cmd.exe process and not the actual REPL. However, exiting
+                // LispIDE.Net does kill the actual REPL process. I'm not sure how to force
+                // kill the child process.
+                if(!this.lispProcess.WaitForExit(100))
+                    this.lispProcess.Kill();
+            }
+
+            this.lispProcess.Close();
+           
             started = false;
         }
 
@@ -226,6 +241,7 @@ namespace LispIDEdotNet.Forms
         private void lispProcess_Exited(object sender, EventArgs e)
         {
             CloseLisp();
+            SetTextCallback("Error: The process exited unexpectedly!\n");
         }
 
         private void lispProcess_ErrorDataReceived(object sender, DataReceivedEventArgs e)
@@ -236,7 +252,7 @@ namespace LispIDEdotNet.Forms
 
         private void ScintillaBuffer_BufferReady(object sender, EventArgs e)
         {
-            SendCommand(this.ScintillaBuffer.BufferedText + Environment.NewLine);
+            SendCommand(this.ScintillaBuffer.BufferedText);
         }
 
         #endregion Events

@@ -865,7 +865,10 @@ namespace LispIDEdotNet.Forms
             fd.ShowHelp = false;
             fd.ShowEffects = false;
             fd.ShowApply = true;
-            fd.Font = ConfigurationManager.Font ?? this.ActiveDocument.Scintilla.Styles[0].Font;
+
+            if(this.ActiveDocument != null)
+                fd.Font = ConfigurationManager.Font ?? this.ActiveDocument.Scintilla.Styles[0].Font;
+            
             fd.Apply += new EventHandler(fontDialog_Apply);
 
             if(fd.ShowDialog(this) == DialogResult.OK)
