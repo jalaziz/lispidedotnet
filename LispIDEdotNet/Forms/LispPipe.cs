@@ -24,6 +24,7 @@ namespace LispIDEdotNet.Forms
 
         private AsyncStreamReader output;
 
+        private bool started = false;
         //private bool carryNewLine = false;
 
         #endregion Fields
@@ -97,7 +98,10 @@ namespace LispIDEdotNet.Forms
 
         protected void OpenLisp()
         {
-            CloseLisp();
+            if(started)
+            {
+                CloseLisp();
+            }
 
             if(String.IsNullOrEmpty(this.LispPath))
             {
@@ -131,6 +135,8 @@ namespace LispIDEdotNet.Forms
                 this.output.BeginRead();
 
                 this.lispProcess.BeginErrorReadLine();
+
+                started = true;
             }
             catch (Exception e)
             {
@@ -149,14 +155,13 @@ namespace LispIDEdotNet.Forms
                 this.output.Close();
             }
 
-            try
-            {
-                this.lispProcess.CancelErrorRead();
-            } catch(InvalidOperationException) {}
+            this.lispProcess.CancelErrorRead();
             
             this.lispProcess.Close();
             this.lispProcess.Exited -= lispProcess_Exited;
             this.lispProcess.ErrorDataReceived -= lispProcess_ErrorDataReceived;
+
+            started = false;
         }
 
         public virtual void Configure(ScintillaNet.Configuration.Configuration config)

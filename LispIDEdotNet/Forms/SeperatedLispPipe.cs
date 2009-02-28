@@ -70,7 +70,7 @@ namespace LispIDEdotNet.Forms
 
         private void SeperatedLispPipe_Load(object sender, EventArgs e)
         {
-            scintillaPipe.Focus();
+            scintillaPipe.Select();
         }
 
         private void scintillaPipe_SizeChanged(object sender, EventArgs e)

@@ -29,6 +29,8 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>LispIDEdotNet.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,10 +67,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ScintillaNet, Version=2.0.3333.4117, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
+    <Reference Include="SingleInstancing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4529da6df8bfe776, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -186,6 +192,7 @@
     <Content Include="config\lispPipe.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="LispIDEdotNet.snk" />
     <None Include="Resources\bitmap1.bmp" />
     <None Include="app.config" />
     <Content Include="CLHS.chm">
@@ -215,6 +222,8 @@
     <None Include="Resources\sendtolisp.bmp" />
     <None Include="ScintillaNet.XML" />
     <Content Include="ScintillaNetLicense.rtf" />
+    <None Include="SingleInstancing.dll" />
+    <None Include="SingleInstancing.XML" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

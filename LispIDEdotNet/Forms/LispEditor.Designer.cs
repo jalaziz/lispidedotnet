@@ -35,6 +35,7 @@
             // 
             // scintilla
             // 
+            this.scintilla.AllowDrop = true;
             this.scintilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scintilla.Location = new System.Drawing.Point(0, 0);
             this.scintilla.Name = "scintilla";

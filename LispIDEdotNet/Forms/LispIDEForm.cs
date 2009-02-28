@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -8,12 +9,13 @@ using System.Windows.Forms;
 using LispIDEdotNet.Utilities;
 using LispIDEdotNet.Utilities.Configuration;
 using ScintillaNet;
+using SingleInstancing;
 using WeifenLuo.WinFormsUI.Docking;
 using ConfigurationManager=LispIDEdotNet.Utilities.ConfigurationManager;
 
 namespace LispIDEdotNet.Forms
 {
-    public partial class LispIDEForm : Form
+    public partial class LispIDEForm : SingleInstance
     {
         #region Constants
 
@@ -44,26 +46,10 @@ namespace LispIDEdotNet.Forms
 
         public LispIDEForm()
         {
-            InitializeComponent();
-            SetToolstripItemsEnabled(false);
-
-            this.scintillaConfig = new ScintillaConfigurationManager();
-
-            //For some reason, enter is not available in the form designer
-            this.sendToLispToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Enter;
-            this.macroexpandToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.Enter;
-
-            ConfigurationManager.RecentFiles.RecentFileChanged +=
-                new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileChanged);
-            ConfigurationManager.RecentFiles.RecentFileClicked +=
-                new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileClicked);
-            ConfigurationManager.RecentFiles.GenerateRecentFiles(recentFilesToolStripMenuItem);
-
-            bool showRecentFiles = (ConfigurationManager.RecentFiles.FileList.Count > 0);
-            recentFilesToolStripMenuItem.Visible = showRecentFiles;
-            recentFilesToolstripSeperator.Visible = showRecentFiles;
-
-            LoadConfiguration();
+            if (IsFirstInstance)
+            {
+                InitializeComponent();
+            }
         }
 
         #region Recent File Events
@@ -465,26 +451,72 @@ namespace LispIDEdotNet.Forms
 
         private void LispIDEForm_Load(object sender, EventArgs e)
         {
+            Debug.WriteLineIf(IsFirstInstance, "First Instance Form Loading", "Debug");
+            Debug.WriteLineIf(!IsFirstInstance, "Second Instance Form Loading", "Debug");
+
             this.Text = Program.Title;
             this.aboutToolStripMenuItem.Text = String.Format(CultureInfo.CurrentCulture, "&About {0}...", Program.Title);
+
+            SetToolstripItemsEnabled(false);
+
+            this.scintillaConfig = new ScintillaConfigurationManager();
+
+            //For some reason, enter is not available in the form designer
+            this.sendToLispToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Enter;
+            this.macroexpandToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.Enter;
+
+            ConfigurationManager.RecentFiles.RecentFileChanged +=
+                new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileChanged);
+            ConfigurationManager.RecentFiles.RecentFileClicked +=
+                new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileClicked);
+            ConfigurationManager.RecentFiles.GenerateRecentFiles(recentFilesToolStripMenuItem);
+
+            bool showRecentFiles = (ConfigurationManager.RecentFiles.FileList.Count > 0);
+            recentFilesToolStripMenuItem.Visible = showRecentFiles;
+            recentFilesToolstripSeperator.Visible = showRecentFiles;
+
+            LoadConfiguration();
 
             LoadOpenDocuments();
 
             string[] args = Environment.GetCommandLineArgs();
 
-            for (int i = 1; i < args.Length && !String.IsNullOrEmpty(Path.GetFileName(args[i])); i++)
-            {
-                OpenFile(args[i]);
-            }
+            LoadDocumentsFromArgs(args);
             
             ConfigurationManager.LoadWindowState(this);
+
+            BeginWaitForConnection();
         }
 
         private void LispIDEForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Debug.WriteLineIf(IsFirstInstance, "First Instance Form Closing", "Debug");
+            Debug.WriteLineIf(!IsFirstInstance, "Second Instance Form Closing", "Debug");
+
             ConfigurationManager.SaveWindowState(this);
             SaveOpenDocuments();
             ConfigurationManager.Save();
+        }
+
+        private void LispIDEForm_MessageReceived(object sender, MessageEventArgs e)
+        {
+            Debug.WriteLine("Message Received", "Debug");
+
+            object[] msg = (object[])e.Message;
+
+            Environment.CurrentDirectory = (string)msg[0];
+            LoadDocumentsFromArgs((string[])msg[1]);
+
+            //Show the window if it is minimized
+            if(this.WindowState == FormWindowState.Minimized)
+                this.WindowState = FormWindowState.Normal;
+
+            Debug.WriteLine("Focused: " + this.Focused, "Debug");
+ 
+            //Give the window focus
+            this.Activate();
+
+            Debug.WriteLine("Focused: " + this.Focused, "Debug");
         }
 
         private void dockPanel1_ActiveDocumentChanged(object sender, EventArgs e)
@@ -576,6 +608,15 @@ namespace LispIDEdotNet.Forms
                     doc.DockState = editor.DockState;
                     ConfigurationManager.OpenDocuments.Add(doc);
                 }
+            }
+        }
+
+        private void LoadDocumentsFromArgs(string[] args)
+        {
+            Debug.WriteLine("Loading document from command-line args", "Debug");
+            for (int i = 1; i < args.Length && !String.IsNullOrEmpty(Path.GetFileName(args[i])); i++)
+            {
+                OpenFile(args[i]);
             }
         }
 
@@ -1024,32 +1065,5 @@ namespace LispIDEdotNet.Forms
         }
 
         #endregion Folding
-
-        private void dockPanel1_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void dockPanel1_GiveFeedback(object sender, GiveFeedbackEventArgs e)
-        {
-
-        }
-
-        private void dockPanel1_DragOver(object sender, DragEventArgs e)
-        {
-            e.Data.GetFormats();
-            object filedrop = e.Data.GetData(DataFormats.FileDrop);
-        }
-
-        private void LispIDEForm_DragOver(object sender, DragEventArgs e)
-        {
-            e.Data.GetFormats();
-            object filedrop = e.Data.GetData(DataFormats.FileDrop);
-        }
-
-        private void LispIDEForm_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
     }
 }

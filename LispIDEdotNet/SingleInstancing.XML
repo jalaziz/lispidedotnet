@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SingleInstancing</name>
+    </assembly>
+    <members>
+        <member name="T:SingleInstancing.SingleInstancingException">
+            <summary>
+            Represents errors occured while trying to enforce single application instancing.
+            </summary>
+        </member>
+        <member name="M:SingleInstancing.SingleInstancingException.#ctor">
+            <summary>
+            Instantiates a new SingleInstancingException object.
+            </summary>
+        </member>
+        <member name="M:SingleInstancing.SingleInstancingException.#ctor(System.String)">
+            <summary>
+            Instantiates a new SingleInstancingException object.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:SingleInstancing.SingleInstancingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Instantiates a new SingleInstancingException object.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="M:SingleInstancing.SingleInstancingException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Instantiates a new SingleInstancingException object with serialized data.
+            </summary>
+            <param name="info">The System.Runtime.Serialization.SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The System.Runtime.Serialization.StreamingContext that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:SingleInstancing.MessageEventArgs">
+            <summary>
+            Provides data for the SingleInstancing.ISingleInstanceEnforcer.OnMessageReceived method.
+            </summary>
+        </member>
+        <member name="M:SingleInstancing.MessageEventArgs.#ctor(System.Object)">
+            <summary>
+            Instantiates a new MessageEventArgs object.
+            </summary>
+            <param name="message">The message to pass to the first running instance of the application.</param>
+            <exception cref="T:System.ArgumentNullException">message is null.</exception>
+        </member>
+        <member name="P:SingleInstancing.MessageEventArgs.Message">
+            <summary>
+            Gets the message sent to the first instance of the application.
+            </summary>
+        </member>
+        <member name="T:SingleInstancing.SingleInstance">
+            <summary>
+            Represents an object used to check for a previous instance of an application, and sending messages to it.
+            </summary>
+        </member>
+        <member name="M:SingleInstancing.SingleInstance.#ctor">
+            <summary>
+            Instantiates a new SingleInstance object.
+            </summary>
+            <exception cref="T:SingleInstancing.SingleInstancingException">A general error occurred while trying to instantiate the SingleInstance. See InnerException for more details.</exception>
+        </member>
+        <member name="M:SingleInstancing.SingleInstance.Finalize">
+            <summary>
+            Releases all unmanaged resources used by the object.
+            </summary>
+        </member>
+        <member name="M:SingleInstancing.SingleInstance.Dispose(System.Boolean)">
+            <summary>
+            Releases all unmanaged resources used by the object, and potentially releases managed resources.
+            </summary>
+            <param name="disposing">true to dispose of managed resources; otherwise false.</param>
+        </member>
+        <member name="M:SingleInstancing.SingleInstance.BeginWaitForConnection">
+            <summary>
+            Indicates that the server (first instance) is ready to accept connections 
+            from clients (second instances)
+            </summary>
+        </member>
+        <member name="M:SingleInstancing.SingleInstance.ClientConnected(System.IAsyncResult)">
+            <summary>
+            The callback method for BeginWaitForConnection. This method is
+            used to determine when a client has connected to the server.
+            </summary>
+            <param name="result">The <see cref="T:System.IAsyncResult"/> from the asynchronous operation.</param>
+        </member>
+        <member name="M:SingleInstancing.SingleInstance.SendMessageToFirstInstance(System.Object)">
+            <summary>
+            Sends a message to the first instance of the application.
+            </summary>
+            <param name="message">The message to send to the first instance of the application. The message must be serializable.</param>
+            <exception cref="T:SingleInstancing.SingleInstancingException">The SingleInstance has failed to send the message to the first application instance. The first instance might have terminated.</exception>
+        </member>
+        <member name="M:SingleInstancing.SingleInstance.OnMessageReceived(SingleInstancing.MessageEventArgs)">
+            <summary>
+            Raises the <see cref="E:SingleInstancing.SingleInstance.MessageReceived"/> event.
+            </summary>
+            <param name="e">A <see cref="T:SingleInstancing.MessageEventArgs"/> that contains the event data. </param>
+        </member>
+        <member name="E:SingleInstancing.SingleInstance.MessageReceived">
+            <summary>
+            Raised when the server (first instance) receives a message from a client (second instance).
+            </summary>
+        </member>
+        <member name="P:SingleInstancing.SingleInstance.IsFirstInstance">
+            <summary>
+            Gets a value indicating whether this instance of the application is the first instance.
+            </summary>
+        </member>
+    </members>
+</doc>

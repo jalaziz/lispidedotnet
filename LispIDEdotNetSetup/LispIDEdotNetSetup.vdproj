@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_3F6ADB893C150391C9C2422539BDDAC8"
+        "OwnerKey" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_71E9C9FB6EF74131AFB2AB864404991A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -53,6 +59,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A3A780D6DDD130BCB23D833445C5917C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3F6ADB893C150391C9C2422539BDDAC8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -166,6 +178,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3F6ADB893C150391C9C2422539BDDAC8"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SingleInstancing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4529da6df8bfe776, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3F6ADB893C150391C9C2422539BDDAC8"
+                    {
+                    "Name" = "8:SingleInstancing.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SingleInstancing.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A3A780D6DDD130BCB23D833445C5917C"
             {
             "AssemblyRegister" = "3:1"
@@ -295,14 +338,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{A5F085C6-3B87-4A5D-B7BF-F8C1360B8A9E}"
-        "PackageCode" = "8:{7F18FFDA-7CAF-4E83-8618-5FC767641356}"
+        "ProductCode" = "8:{7905B593-D9A3-4664-87C0-0B61F328EDED}"
+        "PackageCode" = "8:{8E9AFC5F-460F-4C97-AD79-A30B44E1CC24}"
         "UpgradeCode" = "8:{098C7287-F08E-46A5-BE2B-406C5B56056A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.4"
+        "ProductVersion" = "8:1.0.5"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -858,7 +901,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_71E9C9FB6EF74131AFB2AB864404991A"
             {
-            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Debug\\LispIDE.Net.exe"
+            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Release\\LispIDE.Net.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
@@ -943,7 +986,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FC7FA0C77EF54480BABDA0C34979D222"
             {
-            "SourcePath" = "8:..\\Uninstall\\obj\\Debug\\Uninstall.exe"
+            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"

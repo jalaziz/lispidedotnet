@@ -1198,10 +1198,7 @@
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new System.Drawing.Size(1012, 663);
             this.dockPanel1.TabIndex = 1;
-            this.dockPanel1.DragOver += new System.Windows.Forms.DragEventHandler(this.dockPanel1_DragOver);
-            this.dockPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.dockPanel1_DragDrop);
             this.dockPanel1.ActiveDocumentChanged += new System.EventHandler(this.dockPanel1_ActiveDocumentChanged);
-            this.dockPanel1.GiveFeedback += new System.Windows.Forms.GiveFeedbackEventHandler(this.dockPanel1_GiveFeedback);
             // 
             // toolStripButton1
             // 
@@ -1233,9 +1230,8 @@
             this.Name = "LispIDEForm";
             this.Text = "LispIDE.Net";
             this.Load += new System.EventHandler(this.LispIDEForm_Load);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.LispIDEForm_DragDrop);
+            this.MessageReceived += new System.EventHandler<SingleInstancing.MessageEventArgs>(this.LispIDEForm_MessageReceived);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LispIDEForm_FormClosing);
-            this.DragOver += new System.Windows.Forms.DragEventHandler(this.LispIDEForm_DragOver);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             this.standardMenuStrip.ResumeLayout(false);
