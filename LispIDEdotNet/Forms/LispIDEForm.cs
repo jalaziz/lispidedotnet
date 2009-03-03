@@ -397,12 +397,27 @@ namespace LispIDEdotNet.Forms
 
         private void clhHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(this, "CLHS.chm");
+            string helpPath = Path.Combine(Application.StartupPath, "CLHS.chm");
+            if(this.ActiveDocument != null)
+            {
+                Scintilla scintilla = this.ActiveDocument.Scintilla;
+                string text = scintilla.Selection.Text;
+                
+                text = String.IsNullOrEmpty(text) ? scintilla.GetWordFromPosition(scintilla.CurrentPos) : text;
+                
+                if (!String.IsNullOrEmpty(text))
+                {
+                    Help.ShowHelp(this, helpPath, HelpNavigator.KeywordIndex, text);
+                    return;
+                }
+            }
+
+            Help.ShowHelp(this, helpPath);
         }
 
         private void cltlHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(this, "CLtL2.chm");
+            Help.ShowHelp(this, Path.Combine(Application.StartupPath, "CLtL2.chm"));
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
