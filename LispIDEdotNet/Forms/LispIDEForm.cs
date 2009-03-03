@@ -454,7 +454,7 @@ namespace LispIDEdotNet.Forms
             Debug.WriteLineIf(IsFirstInstance, "First Instance Form Loading", "Debug");
             Debug.WriteLineIf(!IsFirstInstance, "Second Instance Form Loading", "Debug");
 
-            this.Text = Program.Title;
+            SetTitle();
             this.aboutToolStripMenuItem.Text = String.Format(CultureInfo.CurrentCulture, "&About {0}...", Program.Title);
 
             SetToolstripItemsEnabled(false);
@@ -465,10 +465,8 @@ namespace LispIDEdotNet.Forms
             this.sendToLispToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Enter;
             this.macroexpandToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.Enter;
 
-            ConfigurationManager.RecentFiles.RecentFileChanged +=
-                new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileChanged);
-            ConfigurationManager.RecentFiles.RecentFileClicked +=
-                new EventHandler<RecentFileEventArgs>(recentFiles_RecentFileClicked);
+            ConfigurationManager.RecentFiles.RecentFileChanged += recentFiles_RecentFileChanged;
+            ConfigurationManager.RecentFiles.RecentFileClicked += recentFiles_RecentFileClicked;
             ConfigurationManager.RecentFiles.GenerateRecentFiles(recentFilesToolStripMenuItem);
 
             bool showRecentFiles = (ConfigurationManager.RecentFiles.FileList.Count > 0);
@@ -521,16 +519,13 @@ namespace LispIDEdotNet.Forms
 
         private void dockPanel1_ActiveDocumentChanged(object sender, EventArgs e)
         {
-            // Update the main form text to show the current document
-            if (this.ActiveDocument != null)
-                this.Text = String.Format(CultureInfo.CurrentCulture, "{0} - {1}", this.ActiveDocument.Text, Program.Title);
-            else
-                this.Text = Program.Title;
+            SetTitle();
 
             if(this.activeDocument != null)
             {
                 this.activeDocument.Scintilla.SelectionChanged -= Scintilla_SelectionChanged;
                 this.activeDocument.Scintilla.DocumentChange -= Scintilla_DocumentChange;
+                this.activeDocument.TextChanged -= ActiveDocument_TextChanged;
             }
 
             this.activeDocument = this.ActiveDocument;
@@ -557,11 +552,17 @@ namespace LispIDEdotNet.Forms
                 this.lineInfoStatusLabel.Enabled = true;
                 this.lengthStatusLabel.Enabled = true;
 
-                this.activeDocument.Scintilla.SelectionChanged += new EventHandler(Scintilla_SelectionChanged);
-                this.activeDocument.Scintilla.DocumentChange += new EventHandler<NativeScintillaEventArgs>(Scintilla_DocumentChange);
+                this.activeDocument.Scintilla.SelectionChanged += Scintilla_SelectionChanged;
+                this.activeDocument.Scintilla.DocumentChange += Scintilla_DocumentChange;
+                this.activeDocument.TextChanged += ActiveDocument_TextChanged;
             }
 
             SetToolstripItemsEnabled(editItems);
+        }
+
+        void ActiveDocument_TextChanged(object sender, EventArgs e)
+        {
+            SetTitle();
         }
 
         #endregion Main Form Events
@@ -628,6 +629,15 @@ namespace LispIDEdotNet.Forms
             {
                 OpenFile(doc.FilePath, doc.DockState);
             }
+        }
+
+        private void SetTitle()
+        {
+            // Update the main form text to show the current document
+            if (this.ActiveDocument != null)
+                this.Text = String.Format(CultureInfo.CurrentCulture, "{0} - {1}", this.ActiveDocument.Text, Program.Title);
+            else
+                this.Text = Program.Title;
         }
 
         private void ShowEditor(LispEditor editor, DockState dockState)
