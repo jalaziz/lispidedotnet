@@ -31,7 +31,8 @@ namespace ScintillaNet
 	{
 		#region Constants
 
-		public const string DefaultDllName = "SciLexer.dll";
+		public const string DefaultDll32Name = "SciLexer32.dll";
+	    public const string DefaultDll64Name = "SciLexer64.dll";
 
 		#endregion Constants
 
@@ -400,7 +401,18 @@ namespace ScintillaNet
 				//	Exception handling by jacobslusser
 				if (!_sciLexerLoaded)
 				{
-					if (NativeMethods.LoadLibrary(DefaultDllName) == IntPtr.Zero)
+				    IntPtr ptr;
+
+                    if(IntPtr.Size == 8)
+                    {
+                        ptr = NativeMethods.LoadLibrary(DefaultDll64Name);
+                    }
+                    else
+                    {
+                        ptr = NativeMethods.LoadLibrary(DefaultDll32Name);
+                    }
+
+					if (ptr == IntPtr.Zero)
 					{
 						int errorCode = Marshal.GetLastWin32Error();
 						if (errorCode == NativeMethods.ERROR_MOD_NOT_FOUND)
