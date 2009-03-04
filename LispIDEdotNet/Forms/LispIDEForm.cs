@@ -691,6 +691,29 @@ namespace LispIDEdotNet.Forms
             }
         }
 
+        private EndOfLineMode DeterminEndOfLineMode(string text)
+        {
+            for(int i = 0; i < text.Length; i++)
+            {
+                if(text[i] == '\n')
+                {
+                    return EndOfLineMode.LF;
+                }
+
+                if(text[i] == '\r')
+                {
+                    if((i + 1 < text.Length) && (text[i+1] == '\n'))
+                    {
+                        return EndOfLineMode.Crlf;
+                    }
+
+                    return EndOfLineMode.CR;
+                }
+            }
+
+            return EndOfLineMode.Crlf;
+        }
+
         private void NewFile()
         {
             LispEditor editor = FileCommands.NewFile();
@@ -783,6 +806,8 @@ namespace LispIDEdotNet.Forms
                 this.dosEOLToolStripMenuItem.Checked = false;
                 this.linuxEOLToolStripMenuItem.Checked = false;
                 this.macEOLToolStripMenuItem.Checked = false;
+
+                this.ActiveDocument.Scintilla.EndOfLine.Mode = DeterminEndOfLineMode(this.ActiveDocument.Scintilla.Text);
 
                 switch (this.ActiveDocument.Scintilla.EndOfLine.Mode)
                 {

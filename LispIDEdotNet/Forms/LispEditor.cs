@@ -48,6 +48,7 @@ namespace LispIDEdotNet.Forms
             InitializeComponent();
             this.contextMenu = new LispEditorContextMenu(this);
             this.TabPageContextMenuStrip = this.contextMenu;
+            this.Scintilla.NativeInterface.SetProperty("fold.comment", "1");
             this.Scintilla.Folding.Flags = FoldFlag.LineAfterContracted;
             //this.Scintilla.Commands.RemoveBinding(Keys.Enter, Keys.Shift);
             //this.Scintilla.KeyPress += new KeyPressEventHandler(Scintilla_KeyPress);
