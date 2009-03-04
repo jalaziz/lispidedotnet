@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Text;
 using System.Windows.Forms;
 using LispIDEdotNet.Properties;
 using LispIDEdotNet.Utilities;
@@ -43,6 +44,28 @@ namespace LispIDEdotNet.Forms
 
         #endregion Properties
 
+        #region Static
+
+        private static string wordChars;
+
+        static LispEditor()
+        {
+            StringBuilder sb = new StringBuilder();
+            for(char c = (char)32; c < 256; c++)
+            {
+                if ((Char.IsLetterOrDigit(c) || c > 127 || Char.IsSymbol(c) || Char.IsPunctuation(c))
+                    && c != '(' && c != ')' && c != '{' && c != '}' && c != '"' && c != '\'' 
+                    && c != '#' && c != '`' && c != ';' && c != ',' && c != '\\' && c != '|')
+                {
+                    sb.Append(c);
+                }
+            }
+
+            wordChars = sb.ToString();
+        }
+
+        #endregion Static
+
         public LispEditor()
         {
             InitializeComponent();
@@ -50,6 +73,7 @@ namespace LispIDEdotNet.Forms
             this.TabPageContextMenuStrip = this.contextMenu;
             this.Scintilla.NativeInterface.SetProperty("fold.comment", "1");
             this.Scintilla.Folding.Flags = FoldFlag.LineAfterContracted;
+            this.Scintilla.NativeInterface.SetWordChars(wordChars);
             //this.Scintilla.Commands.RemoveBinding(Keys.Enter, Keys.Shift);
             //this.Scintilla.KeyPress += new KeyPressEventHandler(Scintilla_KeyPress);
         }
