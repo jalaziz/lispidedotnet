@@ -338,14 +338,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{75C2C8CC-F553-4E17-9A65-AFFCA905BFB9}"
-        "PackageCode" = "8:{5DA32B8F-C3E0-4F74-80AF-427D2AC7226E}"
+        "ProductCode" = "8:{80F30A1F-D581-4DA1-A4AA-A8D73B4C05C0}"
+        "PackageCode" = "8:{19BE7E02-AEFA-44A8-9A23-14585B610E93}"
         "UpgradeCode" = "8:{098C7287-F08E-46A5-BE2B-406C5B56056A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.7"
+        "ProductVersion" = "8:1.0.8"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -901,7 +901,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_71E9C9FB6EF74131AFB2AB864404991A"
             {
-            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Release\\LispIDE.Net.exe"
+            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\x86\\Release\\LispIDE.Net.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
@@ -987,7 +987,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FC7FA0C77EF54480BABDA0C34979D222"
             {
-            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
+            "SourcePath" = "8:..\\Uninstall\\obj\\x86\\Release\\Uninstall.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"

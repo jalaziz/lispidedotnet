@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3CC1A141FD1CE919881A98FB782469D0"
+        "OwnerKey" = "8:_1802215AD65548189E4E0821B5477163"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6688A82AA153F9AB42AE35CC30FB0259"
         "OwnerKey" = "8:_1802215AD65548189E4E0821B5477163"
         "MsmSig" = "8:_UNDEFINED"
@@ -33,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C8CB23DCA16B3C6BCE72B43ECCC6D100"
-        "OwnerKey" = "8:_1802215AD65548189E4E0821B5477163"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_E78807F5D03FD91462276AA9A9FFA70C"
         "OwnerKey" = "8:_1802215AD65548189E4E0821B5477163"
         "MsmSig" = "8:_UNDEFINED"
@@ -46,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C8CB23DCA16B3C6BCE72B43ECCC6D100"
+        "OwnerKey" = "8:_3CC1A141FD1CE919881A98FB782469D0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,20 +136,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6688A82AA153F9AB42AE35CC30FB0259"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3CC1A141FD1CE919881A98FB782469D0"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SingleInstancing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4529da6df8bfe776, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ScintillaNet, Version=2.0.3349.41891, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_6688A82AA153F9AB42AE35CC30FB0259"
+                    "_3CC1A141FD1CE919881A98FB782469D0"
                     {
-                    "Name" = "8:SingleInstancing.dll"
+                    "Name" = "8:ScintillaNet.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:SingleInstancing.dll"
+            "SourcePath" = "8:ScintillaNet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F2D62825F9D0479EBB73CEF7F2CA22B3"
@@ -167,20 +167,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C8CB23DCA16B3C6BCE72B43ECCC6D100"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6688A82AA153F9AB42AE35CC30FB0259"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ScintillaNet, Version=2.0.3333.4117, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:SingleInstancing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4529da6df8bfe776, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C8CB23DCA16B3C6BCE72B43ECCC6D100"
+                    "_6688A82AA153F9AB42AE35CC30FB0259"
                     {
-                    "Name" = "8:ScintillaNet.dll"
+                    "Name" = "8:SingleInstancing.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:ScintillaNet.dll"
+            "SourcePath" = "8:SingleInstancing.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F2D62825F9D0479EBB73CEF7F2CA22B3"
@@ -296,14 +296,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{75FDEE45-2548-4901-AF19-5F96FE4A5AC7}"
-        "PackageCode" = "8:{A9EEE002-2461-4075-8B61-8D21A2D43EE5}"
+        "ProductCode" = "8:{B32F96F1-2C8C-4DEF-9785-5F0C01551630}"
+        "PackageCode" = "8:{96216D3B-61C9-4625-A568-A6810873220C}"
         "UpgradeCode" = "8:{1B0768D2-C908-43CA-9E27-35495AD331A5}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.7"
+        "ProductVersion" = "8:1.0.8"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -887,7 +887,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1802215AD65548189E4E0821B5477163"
             {
-            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Release\\LispIDE.Net.exe"
+            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\x86\\Release\\LispIDE.Net.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F2D62825F9D0479EBB73CEF7F2CA22B3"
@@ -945,7 +945,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B79E2BC7B6594BB891581840AC744A04"
             {
-            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
+            "SourcePath" = "8:..\\Uninstall\\obj\\x86\\Release\\Uninstall.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F2D62825F9D0479EBB73CEF7F2CA22B3"
