@@ -46,19 +46,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3CC1A141FD1CE919881A98FB782469D0"
+        "OwnerKey" = "8:_1802215AD65548189E4E0821B5477163"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B79E2BC7B6594BB891581840AC744A04"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1802215AD65548189E4E0821B5477163"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -71,6 +65,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6688A82AA153F9AB42AE35CC30FB0259"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3CC1A141FD1CE919881A98FB782469D0"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -91,6 +91,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -107,6 +115,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -296,14 +312,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{B32F96F1-2C8C-4DEF-9785-5F0C01551630}"
-        "PackageCode" = "8:{96216D3B-61C9-4625-A568-A6810873220C}"
+        "ProductCode" = "8:{EAAAA6A2-2170-49D4-986A-ABE9FFB2B97D}"
+        "PackageCode" = "8:{2A8A8155-0187-4BF1-9FFB-C1B0CA91A912}"
         "UpgradeCode" = "8:{1B0768D2-C908-43CA-9E27-35495AD331A5}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.8"
+        "ProductVersion" = "8:1.0.9"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -887,7 +903,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1802215AD65548189E4E0821B5477163"
             {
-            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\x86\\Release\\LispIDE.Net.exe"
+            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Release\\LispIDE.Net.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F2D62825F9D0479EBB73CEF7F2CA22B3"
@@ -945,7 +961,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B79E2BC7B6594BB891581840AC744A04"
             {
-            "SourcePath" = "8:..\\Uninstall\\obj\\x86\\Release\\Uninstall.exe"
+            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F2D62825F9D0479EBB73CEF7F2CA22B3"

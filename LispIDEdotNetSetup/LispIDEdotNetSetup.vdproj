@@ -52,12 +52,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F2E9CBF415BA8C2886755515F47276F5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FC7FA0C77EF54480BABDA0C34979D222"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -71,6 +65,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_3F6ADB893C150391C9C2422539BDDAC8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F2E9CBF415BA8C2886755515F47276F5"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -338,14 +338,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{80F30A1F-D581-4DA1-A4AA-A8D73B4C05C0}"
-        "PackageCode" = "8:{19BE7E02-AEFA-44A8-9A23-14585B610E93}"
+        "ProductCode" = "8:{C9BE1DFE-3C6A-432D-B934-420B4CA4C5EB}"
+        "PackageCode" = "8:{228F93E9-E707-46C4-9C46-1ABE71CBB01F}"
         "UpgradeCode" = "8:{098C7287-F08E-46A5-BE2B-406C5B56056A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.8"
+        "ProductVersion" = "8:1.0.9"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -901,7 +901,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_71E9C9FB6EF74131AFB2AB864404991A"
             {
-            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\x86\\Release\\LispIDE.Net.exe"
+            "SourcePath" = "8:..\\LispIDEdotNet\\obj\\Release\\LispIDE.Net.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
@@ -987,7 +987,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FC7FA0C77EF54480BABDA0C34979D222"
             {
-            "SourcePath" = "8:..\\Uninstall\\obj\\x86\\Release\\Uninstall.exe"
+            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2657B26A1FB14E1BA0D16A2F0E55A4CD"
