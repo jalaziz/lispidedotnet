@@ -550,16 +550,9 @@ namespace LispIDEdotNet.Forms
             if (this.activeDocument == null)
             {
                 editItems = false;
-                this.eolFormatStatusLabel.Text = String.Empty;
                 this.eolFormatStatusLabel.Enabled = false;
-
-                this.lineInfoStatusLabel.Text = String.Empty;
                 this.lineInfoStatusLabel.Enabled = false;
-
-                this.lengthStatusLabel.Text = String.Empty;
                 this.lengthStatusLabel.Enabled = false;
-
-                SetStatusLabels();
             }
             else
             {
@@ -571,6 +564,8 @@ namespace LispIDEdotNet.Forms
                 this.activeDocument.Scintilla.DocumentChange += Scintilla_DocumentChange;
                 this.activeDocument.TextChanged += ActiveDocument_TextChanged;
             }
+
+            SetStatusLabels();
 
             SetToolstripItemsEnabled(editItems);
         }
