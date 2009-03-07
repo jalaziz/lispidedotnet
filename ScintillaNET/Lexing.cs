@@ -332,42 +332,67 @@ namespace ScintillaNet
 			}
 		}
 
+	    private bool _commentLineStart = false;
+	    public bool CommentAtLineStart
+	    {
+	        get
+	        {
+	            return _commentLineStart;
+	        }
+            set
+            {
+                _commentLineStart = value;
+            }
+	    }
+
 		public void LineComment()
 		{
-			if (string.IsNullOrEmpty(_lineCommentPrefix))
-				return;
-
-			//	So the theory behind line commenting is that for every selected line
-			//	we look for the first non-whitespace character and insert the line
-			//	comment prefix. Lines without non-whitespace are skipped.
-			NativeScintilla.BeginUndoAction();
-
-			Range selRange = Scintilla.Selection.Range;
-			int start = selRange.StartingLine.Number;
-			int end = selRange.EndingLine.Number;
-
-			//	We're tracking the new end of the selection range including
-			//	the amount it expands because we're inserting new text.
-			int offset = _lineCommentPrefix.Length;
-
-			for (int i = start; i <= end; i++)
-			{
-				Line l = Scintilla.Lines[i];
-				int firstWordChar = findFirstNonWhitespaceChar(l.Text);
-				if (firstWordChar >= 0)
-				{
-					Scintilla.InsertText(l.StartPosition + firstWordChar, _lineCommentPrefix);
-					selRange.End += offset;
-				}
-			}
-
-			NativeScintilla.EndUndoAction();
-
-			//	An odd side-effect of InsertText is that we lose the current
-			//	selection. This is undesirable. This is why we were tracking
-			//	the end position offset.
-			selRange.Select();
+			LineComment(CommentAtLineStart);
 		}
+
+        public void LineComment(bool lineStart)
+        {
+            if (string.IsNullOrEmpty(_lineCommentPrefix))
+                return;
+
+            //	So the theory behind line commenting is that for every selected line
+            //	we look for the first non-whitespace character and insert the line
+            //	comment prefix. Lines without non-whitespace are skipped.
+            NativeScintilla.BeginUndoAction();
+
+            Range selRange = Scintilla.Selection.Range;
+            int start = selRange.StartingLine.Number;
+            int end = selRange.EndingLine.Number;
+
+            //	We're tracking the new end of the selection range including
+            //	the amount it expands because we're inserting new text.
+            int offset = _lineCommentPrefix.Length;
+
+            for (int i = start; i <= end; i++)
+            {
+                Line l = Scintilla.Lines[i];
+                int firstWordChar = findFirstNonWhitespaceChar(l.Text);
+                if (firstWordChar >= 0)
+                {
+                    int startPos = l.StartPosition;
+
+                    if(!lineStart)
+                    {
+                        startPos += firstWordChar;
+                    }
+
+                    Scintilla.InsertText(startPos, _lineCommentPrefix);
+                    selRange.End += offset;
+                }
+            }
+
+            NativeScintilla.EndUndoAction();
+
+            //	An odd side-effect of InsertText is that we lose the current
+            //	selection. This is undesirable. This is why we were tracking
+            //	the end position offset.
+            selRange.Select();
+        }
 
 		public void LineUncomment()
 		{
@@ -404,43 +429,51 @@ namespace ScintillaNet
 
 		public void ToggleLineComment()
 		{
-			if (string.IsNullOrEmpty(_lineCommentPrefix))
-				return;
-
-			NativeScintilla.BeginUndoAction();
-
-			Range selRange = Scintilla.Selection.Range;
-			int start = selRange.StartingLine.Number;
-			int end = selRange.EndingLine.Number;
-
-			int offset = _lineCommentPrefix.Length;
-
-			for (int i = start; i <= end; i++)
-			{
-				Line l = Scintilla.Lines[i];
-				int firstWordChar = findFirstNonWhitespaceChar(l.Text);
-				if (firstWordChar >= 0)
-				{
-					int startPos = l.StartPosition + firstWordChar;
-					Range commentRange = Scintilla.GetRange(startPos, startPos + offset);
-					if (commentRange.Text == _lineCommentPrefix)
-					{
-						commentRange.Text = string.Empty;
-						selRange.End -= offset;
-					}
-					else
-					{
-						Scintilla.InsertText(l.StartPosition + firstWordChar, _lineCommentPrefix);
-						selRange.End += offset;
-					}
-				}
-			}
-
-			NativeScintilla.EndUndoAction();
-			selRange.Select();
+		    ToggleLineComment(CommentAtLineStart);
 		}
 
+        public void ToggleLineComment(bool lineStart)
+        {
+            if (string.IsNullOrEmpty(_lineCommentPrefix))
+                return;
 
+            NativeScintilla.BeginUndoAction();
+
+            Range selRange = Scintilla.Selection.Range;
+            int start = selRange.StartingLine.Number;
+            int end = selRange.EndingLine.Number;
+
+            int offset = _lineCommentPrefix.Length;
+
+            for (int i = start; i <= end; i++)
+            {
+                Line l = Scintilla.Lines[i];
+                int firstWordChar = findFirstNonWhitespaceChar(l.Text);
+                if (firstWordChar >= 0)
+                {
+                    int startPos = l.StartPosition;
+                    
+                    if(!lineStart)
+                    {
+                        startPos += firstWordChar;
+                    }
+                    
+                    Range commentRange = Scintilla.GetRange(startPos, startPos + offset);
+                    if (commentRange.Text == _lineCommentPrefix)
+                    {
+                        commentRange.Text = string.Empty;
+                        selRange.End -= offset;
+                    } else
+                    {
+                        Scintilla.InsertText(startPos, _lineCommentPrefix);
+                        selRange.End += offset;
+                    }
+                }
+            }
+
+            NativeScintilla.EndUndoAction();
+            selRange.Select();
+        }
 
 		private int findFirstNonWhitespaceChar(string s)
 		{

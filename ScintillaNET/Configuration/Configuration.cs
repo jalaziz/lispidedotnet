@@ -811,6 +811,9 @@ namespace ScintillaNet.Configuration
 						case "streamcommentsuffix":
 							_lexing_StreamCommentSuffix = reader.Value;
 							break;
+                        case "commentatlinestart":
+					        _lexing_CommentLineStart = getBool(reader.Value);
+					        break;
 					}
 				}
 				reader.MoveToElement();
@@ -1550,6 +1553,7 @@ namespace ScintillaNet.Configuration
 				_lexing_LineCommentPrefix = getString(lexerNode.GetAttributeNode("LineCommentPrefix"));
 				_lexing_StreamCommentPrefix = getString(lexerNode.GetAttributeNode("StreamCommentPrefix"));
 				_lexing_StreamCommentSuffix = getString(lexerNode.GetAttributeNode("StreamCommentSuffix"));
+			    _lexing_CommentLineStart = getBool(lexerNode.GetAttribute("CommentAtLineStart"));
 
 				XmlElement propNode = lexerNode.SelectSingleNode("Properties") as XmlElement;
 				if (propNode != null)
@@ -2675,6 +2679,19 @@ namespace ScintillaNet.Configuration
 				_lexing_StreamCommentPrefix = value;
 			}
 		}
+
+	    private bool? _lexing_CommentLineStart;
+	    public bool? Lexing_CommentAtLineStart
+	    {
+	        get
+	        {
+	            return _lexing_CommentLineStart;
+	        }
+            set
+            {
+                _lexing_CommentLineStart = value;
+            }
+	    }
 
 		private LexerPropertiesConfig _lexing_Properties = new LexerPropertiesConfig();
 		public LexerPropertiesConfig Lexing_Properties

@@ -1164,6 +1164,15 @@ namespace ScintillaNet.Configuration
 			if (s != null)
 				Scintilla.Lexing.StreamCommentSufix = s;
 
+		   b = null;
+			foreach (Configuration c in configList)
+			{
+				if (c.Lexing_CommentAtLineStart.HasValue)
+					b = c.Lexing_CommentAtLineStart;
+			}
+			if (b.HasValue)
+				Scintilla.Lexing.CommentAtLineStart = b.Value;
+
 			s = null;
 			foreach (Configuration c in configList)
 			{
