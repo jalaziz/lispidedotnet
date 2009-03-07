@@ -82,7 +82,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScintillaNet, Version=2.0.3349.41891, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
+    <Reference Include="ScintillaNet, Version=2.0.3353.4968, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL" />
     <Reference Include="SingleInstancing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4529da6df8bfe776, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />

@@ -149,7 +149,7 @@
       <Style Name="INDENTGUIDE" Number="37" FontName="Consolas" Size="11" />
     </Styles>
 
-    <Lexer LexerName="lisp" LineCommentPrefix=";" StreamCommentPrefix="#| " StreamCommentSuffix=" |#" >
+    <Lexer LexerName="lisp" LineCommentPrefix=";" StreamCommentPrefix="#| " StreamCommentSuffix=" |#" CommentAtLineStart="true">
       <Keywords List="0" Inherit="False">
         <![CDATA[
         *break-on-signals* *compile-file-pathname* *compile-file-truename* *compile-print* *compile-verbose* *debug-io* 

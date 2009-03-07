@@ -19,8 +19,8 @@ namespace LispIDEdotNet.Forms
     {
         #region Constants
 
-        private const string NEW_DOCUMENT_TEXT = "Untitled";
-        private const int LINE_NUMBERS_MARGIN_WIDTH = 35; // TODO Don't hardcode this
+        private const int LINE_NUMBERS_MARGIN_WIDTH = 35; // I'd rather not hardcode these values, but
+        private const int FOLD_MARGIN_WIDTH = 14;         // I can't think of a much better solution.
 
         #endregion Constants
 
@@ -248,19 +248,19 @@ namespace LispIDEdotNet.Forms
         private void commentStreamToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.ActiveDocument != null)
-                this.ActiveDocument.Scintilla.Commands.Execute(BindableCommand.StreamComment);
+                this.ActiveDocument.Scintilla.Lexing.StreamComment();
         }
 
         private void commentLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.ActiveDocument != null)
-                this.ActiveDocument.Scintilla.Commands.Execute(BindableCommand.LineComment);
+                this.ActiveDocument.Scintilla.Lexing.LineComment();
         }
 
         private void uncommentLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.ActiveDocument != null)
-                this.ActiveDocument.Scintilla.Commands.Execute(BindableCommand.LineUncomment);
+                this.ActiveDocument.Scintilla.Lexing.LineUncomment();
         }
 
         private void indentToolStripButton_Click(object sender, EventArgs e)
@@ -359,7 +359,7 @@ namespace LispIDEdotNet.Forms
 
         private void lineNumbersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int lineNumbers = lineNumbersToolStripMenuItem.Checked ? 35 : 0;
+            int lineNumbers = lineNumbersToolStripMenuItem.Checked ? LINE_NUMBERS_MARGIN_WIDTH : 0;
 
             foreach (LispEditor editor in this.dockPanel1.Documents)
             {
@@ -668,7 +668,8 @@ namespace LispIDEdotNet.Forms
             editor.Scintilla.IsBraceMatching = true;
 
             editor.Scintilla.Folding.IsEnabled = ConfigurationManager.EnableFolding;
-            editor.Scintilla.Margins[0].Width = ConfigurationManager.ShowLineNumbers ? 35 : 0;
+            editor.Scintilla.Margins[2].Width = ConfigurationManager.EnableFolding ? FOLD_MARGIN_WIDTH : 0;
+            editor.Scintilla.Margins[0].Width = ConfigurationManager.ShowLineNumbers ? LINE_NUMBERS_MARGIN_WIDTH : 0;
             editor.Scintilla.EndOfLine.IsVisible = ConfigurationManager.ShowEOL;
             editor.Scintilla.Whitespace.Mode = ConfigurationManager.ShowWhitespace
                                                    ? WhitespaceMode.VisibleAlways
@@ -1052,7 +1053,12 @@ namespace LispIDEdotNet.Forms
 
             foreach (LispEditor editor in dockPanel1.Documents)
             {
+                // Setting IsEnabled is not enough, for some reason the UI
+                // isn't updated if this changes after the inital window drawing.
+                // Therefore, we must also make the folding margin invisible.
                 editor.Scintilla.Folding.IsEnabled = enabled;
+                editor.Scintilla.Lexing.Colorize();
+                editor.Scintilla.Margins[2].Width = enabled ? FOLD_MARGIN_WIDTH : 0;
             }
         }
 

@@ -33,12 +33,12 @@ namespace LispIDEdotNet.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SeperatedLispPipe));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.scintilla = new ScintillaNet.Scintilla();
-            this.scintillaPipe = new LispIDEdotNet.Components.SeperatedScintillaPipe();
+            this.scintillaBuffer = new LispIDEdotNet.Components.SeperatedScintillaPipe();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scintilla)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scintillaPipe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scintillaBuffer)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -55,7 +55,7 @@ namespace LispIDEdotNet.Forms
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.scintillaPipe);
+            this.splitContainer1.Panel2.Controls.Add(this.scintillaBuffer);
             this.splitContainer1.Panel2MinSize = 40;
             this.splitContainer1.Size = new System.Drawing.Size(533, 362);
             this.splitContainer1.SplitterDistance = 289;
@@ -70,15 +70,15 @@ namespace LispIDEdotNet.Forms
             this.scintilla.Size = new System.Drawing.Size(529, 285);
             this.scintilla.TabIndex = 0;
             // 
-            // scintillaPipe
+            // scintillaBuffer
             // 
-            this.scintillaPipe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scintillaPipe.Location = new System.Drawing.Point(0, 0);
-            this.scintillaPipe.Name = "scintillaPipe";
-            this.scintillaPipe.Size = new System.Drawing.Size(529, 67);
-            this.scintillaPipe.TabIndex = 0;
-            this.scintillaPipe.TextDeleted += new System.EventHandler<ScintillaNet.TextModifiedEventArgs>(this.seperatedScintillaPipe1_TextDeleted);
-            this.scintillaPipe.TextInserted += new System.EventHandler<ScintillaNet.TextModifiedEventArgs>(this.seperatedScintillaPipe1_TextInserted);
+            this.scintillaBuffer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scintillaBuffer.Location = new System.Drawing.Point(0, 0);
+            this.scintillaBuffer.Name = "scintillaBuffer";
+            this.scintillaBuffer.Size = new System.Drawing.Size(529, 67);
+            this.scintillaBuffer.TabIndex = 0;
+            this.scintillaBuffer.TextDeleted += new System.EventHandler<ScintillaNet.TextModifiedEventArgs>(this.seperatedScintillaPipe1_TextDeleted);
+            this.scintillaBuffer.TextInserted += new System.EventHandler<ScintillaNet.TextModifiedEventArgs>(this.seperatedScintillaPipe1_TextInserted);
             // 
             // SeperatedLispPipe
             // 
@@ -93,7 +93,7 @@ namespace LispIDEdotNet.Forms
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scintilla)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scintillaPipe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scintillaBuffer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -101,7 +101,7 @@ namespace LispIDEdotNet.Forms
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private SeperatedScintillaPipe scintillaPipe;
+        private SeperatedScintillaPipe scintillaBuffer;
         private ScintillaNet.Scintilla scintilla;
     }
 }

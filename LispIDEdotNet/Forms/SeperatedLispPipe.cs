@@ -20,7 +20,7 @@ namespace LispIDEdotNet.Forms
         {
             get
             {
-                return this.scintillaPipe;
+                return this.scintillaBuffer;
             }
         }
 
@@ -29,10 +29,10 @@ namespace LispIDEdotNet.Forms
         public SeperatedLispPipe()
         {
             InitializeComponent();
-            scintillaPipe.SizeChanged += new EventHandler(scintillaPipe_SizeChanged);
+            scintillaBuffer.SizeChanged += new EventHandler(scintillaPipe_SizeChanged);
             scintilla.IsBraceMatching = true;
-            scintillaPipe.IsBraceMatching = true;
-            scintillaPipe.LineWrap.Mode = WrapMode.None;
+            scintillaBuffer.IsBraceMatching = true;
+            scintillaBuffer.LineWrap.Mode = WrapMode.None;
         }
 
         #region Methods
@@ -48,9 +48,9 @@ namespace LispIDEdotNet.Forms
 
         private void SetPanelSize()
         {
-            int lines = this.scintillaPipe.Lines.Count;
+            int lines = this.scintillaBuffer.Lines.Count;
             int height = this.splitContainer1.Height;
-            height = height - (lines * this.scintillaPipe.Lines[0].Height
+            height = height - (lines * this.scintillaBuffer.Lines[0].Height
                                + this.splitContainer1.SplitterRectangle.Height
                                + (this.splitContainer1.Margin.Bottom << 2));
 
@@ -61,7 +61,7 @@ namespace LispIDEdotNet.Forms
         public override void Configure(ScintillaNet.Configuration.Configuration config)
         {
             scintilla.ConfigurationManager.Configure(config);
-            scintillaPipe.ConfigurationManager.Configure(config);
+            scintillaBuffer.ConfigurationManager.Configure(config);
         }
 
         #endregion Methods
@@ -70,13 +70,13 @@ namespace LispIDEdotNet.Forms
 
         private void SeperatedLispPipe_Load(object sender, EventArgs e)
         {
-            scintillaPipe.Select();
+            scintillaBuffer.Select();
         }
 
         private void scintillaPipe_SizeChanged(object sender, EventArgs e)
         {
-            this.scintillaPipe.Scrolling.HorizontalWidth = this.scintillaPipe.ClientRectangle.Width
-                                                           - (this.scintillaPipe.Margin.Left << 2);
+            this.scintillaBuffer.Scrolling.HorizontalWidth = this.scintillaBuffer.ClientRectangle.Width
+                                                           - (this.scintillaBuffer.Margin.Left << 2);
         }
 
         private void seperatedScintillaPipe1_TextInserted(object sender, TextModifiedEventArgs e)
