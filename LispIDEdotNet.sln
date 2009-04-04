@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uninstall", "Uninstall\Unin
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LispIDEdotNetSetupx64", "LispIDEdotNetSetupx64\LispIDEdotNetSetupx64.vdproj", "{1F4334C2-EF48-4E87-92C1-4D1CDEF6737D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9712D7EE-250B-43C7-9E5F-77F8D9CA8AFF}"
+	ProjectSection(SolutionItems) = preProject
+		lispidedotnet.build = lispidedotnet.build
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="LispIDE.Net" default="help" basedir="." xmlns="http://nant.sourceforge.net/release/latest/nant.xsd">
+  <description>LispIDE.Net Build File</description>
+  <readregistry property="vsdir" key="SOFTWARE\Microsoft\VisualStudio\9.0\InstallDir" hive="LocalMachine" />
+  <property name="project.version" value="1.1.0"/>
+  <property name="project.basedir" value="${project::get-base-directory()}"/>
+  <property name="debug" value="false" overwrite="false" />
+  <property name="solution" value="${project.basedir}\LispIDEdotNet.sln"/>
+  <property name="mainproj" value="${project.basedir}\LispIDEdotNet\LispIDEdotNet.csproj"/>
+  <property name="uninstallproj" value="${project.basedir}\Uninstall\Uninstall.csproj"/>
+  <property name="setup32" value="${project.basedir}\LispIDEdotNetSetup"/>
+  <property name="setup64" value="${project.basedir}\LispIDEdotNetSetupx64"/>
+  <property name="setup32proj" value="${setup32}\LispIDEdotNetSetup.vdproj"/>
+  <property name="setup64proj" value ="${setup64}\LispIDEdotNetSetupx64.vdproj"/>
+  <target name="all" description="" depends="build,buildmsi,zip" />
+  <target name="zip" description="zips the setup files" depends="build">
+    <zip zipfile="LispIDEdotNetSetup32.zip" comment="LispIDE.Net x86 Setup">
+      <fileset basedir="${setup32}">
+        <include name="Debug\*" if="${debug}"/>
+        <include name="Release\*" unless="${debug}"/>
+      </fileset>
+    </zip>
+    <zip zipfile="LispIDEdotNetSetup64.zip" comment="LispIDE.Net x64 Setup">
+      <fileset basedir="${setup64}">
+        <include name="Debug\*" if="${debug}"/>
+        <include name="Release\*" unless="${debug}"/>
+      </fileset>
+    </zip>
+  </target>
+  <target name="build" description="compiles the source code">
+    <msbuild project="${solution}" target="build">
+      <property name="Configuration" value="Debug" if="${debug}"/>
+      <property name="Configuration" value="Release" unless="${debug}"/>
+      <property name="Platform" value="x86"/>
+    </msbuild>
+    <msbuild project="${solution}" target="build">
+      <property name="Configuration" value="Debug" if="${debug}"/>
+      <property name="Configuration" value="Release" unless="${debug}"/>
+      <property name="Platform" value="x64"/>
+    </msbuild>
+  </target>
+  <target name="buildmsi" description="builds the setup files" depends="build,updatesetupversion">
+    <exec basedir="${vsdir}" program="devenv.exe" 
+          commandline="${solution} /project ${setup32proj} /build Debug" if="${debug}"/>
+    <exec basedir="${vsdir}" program="devenv.exe" 
+          commandline="${solution} /project ${setup32proj} /build Release" unless="${debug}"/>
+    <exec basedir="${vsdir}" program="devenv.exe" 
+          commandline="${solution} /project ${setup64proj} /build Debug" if="${debug}"/>
+    <exec basedir="${vsdir}" program="devenv.exe" 
+          commandline="${solution} /project ${setup64proj} /build Release" unless="${debug}"/>
+  </target>
+  <target name="updatesetupversion">
+    <script language="C#">
+      <code>
+        <![CDATA[
+        public static void ScriptMain(Project project) {
+          string projectVersion = project.Properties["project.version"];
+          string setupFileName32 = Path.Combine(project.BaseDirectory, project.Properties["setup32proj"]);
+          string setupFileName64 = Path.Combine(project.BaseDirectory, project.Properties["setup64proj"]);
+          UpdateVersion(projectVersion, setupFileName32);
+          UpdateVersion(projectVersion, setupFileName64);
+        }
+        public static void UpdateVersion(string version, string filename)
+        {
+          StreamReader reader = File.OpenText(filename);
+          string file = String.Empty;
+          try { 
+            Regex expression1 = new Regex(@"(?:\""ProductCode\"" = \""8.){([\d\w-]+)}");
+            Regex expression2 = new Regex(@"(?:\""PackageCode\"" = \""8.){([\d\w-]+)}");
+            Regex expression3 = new Regex(@"(?:\""ProductVersion\"" = \""8.)(\d.\d.\d+)");
+            file = reader.ReadToEnd();
+            file = expression1.Replace(file,"\"ProductCode\" = \"8:{" + Guid.NewGuid().ToString().ToUpper() + "}");
+            file = expression2.Replace(file,"\"PackageCode\" = \"8:{" + Guid.NewGuid().ToString().ToUpper() + "}");
+            file = expression3.Replace(file,"\"ProductVersion\" = \"8:" + version);
+          } finally {
+            // must remember to close the file or the compile may not work
+            reader.Close();
+          } 
+          // create a writer and open the file
+          TextWriter tw = new StreamWriter(filename);
+          try {
+            // write a line of text to the file
+            tw.WriteLine(file);
+          } finally {
+            // close the stream
+            tw.Close();
+          }
+        }
+        ]]>
+      </code>
+    </script>
+  </target>
+</project>
