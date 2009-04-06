@@ -15,6 +15,14 @@ namespace LispIDEdotNet.Components
             }
         }
 
+        protected override bool HandleEnter
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         #endregion Properties
 
         #region Methods

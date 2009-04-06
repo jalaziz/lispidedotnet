@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using LispIDEdotNet.Utilities;
 using LispIDEdotNet.Utilities.Configuration;
@@ -23,6 +25,13 @@ namespace LispIDEdotNet.Forms
         private const int FOLD_MARGIN_WIDTH = 14;         // I can't think of a much better solution.
 
         #endregion Constants
+
+        #region Static
+
+        // This regex expression allows us to determine the function name from a defun block.
+        private static readonly Regex defunRegex = new Regex(@"\(defun\s+([^()\s]+)");
+
+        #endregion
 
         #region Fields
 
@@ -959,6 +968,69 @@ namespace LispIDEdotNet.Forms
 
             if (!String.IsNullOrEmpty(pipetext))
                 this.lispPipe.SendCommand("(pprint (macroexpand-1 '" + pipetext + "))");
+        }
+
+        private void traceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveDocument == null)
+                return;
+
+            StringCollection functions = new StringCollection();
+            string pipetext = this.ActiveDocument.GetPipeString();
+
+            if (String.IsNullOrEmpty(pipetext))
+            {
+                pipetext = this.ActiveDocument.Scintilla.GetWordFromPosition(
+                    this.ActiveDocument.Scintilla.CurrentPos);
+
+                if (!String.IsNullOrEmpty(pipetext))
+                    functions.Add(pipetext);
+            }
+            else
+            {
+                Match matchResult = defunRegex.Match(pipetext);
+                while (matchResult.Success)
+                {
+                    functions.Add(matchResult.Groups[1].Value);
+                    matchResult = matchResult.NextMatch();
+                }
+            }
+
+            foreach (string function in functions)
+            {
+                this.lispPipe.SendCommand("(trace " + function + ")");
+            }
+        }
+
+        private void untraceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ActiveDocument == null)
+                return;
+
+            StringCollection functions = new StringCollection();
+            string pipetext = this.ActiveDocument.GetPipeString();
+
+            if (String.IsNullOrEmpty(pipetext))
+            {
+                pipetext = this.ActiveDocument.Scintilla.GetWordFromPosition(
+                    this.ActiveDocument.Scintilla.CurrentPos);
+
+                if (!String.IsNullOrEmpty(pipetext))
+                    functions.Add(pipetext);
+            } else
+            {
+                Match matchResult = defunRegex.Match(pipetext);
+                while (matchResult.Success)
+                {
+                    functions.Add(matchResult.Groups[1].Value);
+                    matchResult = matchResult.NextMatch();
+                }
+            }
+
+            foreach (string function in functions)
+            {
+                this.lispPipe.SendCommand("(untrace " + function + ")");
+            }
         }
 
         private void sendToLispToolStripMenuItem_Click(object sender, EventArgs e)

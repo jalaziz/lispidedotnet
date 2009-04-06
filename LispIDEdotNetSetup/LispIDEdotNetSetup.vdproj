@@ -338,14 +338,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LispIDE.Net"
-        "ProductCode" = "8:{2501EE6E-A01E-4CB6-92D3-FE1BA7277FEA}"
-        "PackageCode" = "8:{1E767B28-4F3F-44EE-8A8D-54A74D330F77}"
+        "ProductCode" = "8:{10E2D1B2-F350-4D34-8B3F-EA82CFC642EC}"
+        "PackageCode" = "8:{69BDB191-7A88-4800-8EF0-732BEE4F33DF}"
         "UpgradeCode" = "8:{098C7287-F08E-46A5-BE2B-406C5B56056A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.1.1"
         "Manufacturer" = "8:LispIDEdotNet"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1016,6 +1016,7 @@
         }
     }
 }
+
 
 
 

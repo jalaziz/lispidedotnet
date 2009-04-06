@@ -2,7 +2,7 @@
 <project name="LispIDE.Net" default="help" basedir="." xmlns="http://nant.sourceforge.net/release/latest/nant.xsd">
   <description>LispIDE.Net Build File</description>
   <readregistry property="vsdir" key="SOFTWARE\Microsoft\VisualStudio\9.0\InstallDir" hive="LocalMachine" />
-  <property name="project.version" value="1.1.0"/>
+  <property name="project.version" value="1.1.1"/>
   <property name="project.basedir" value="${project::get-base-directory()}"/>
   <property name="debug" value="false" overwrite="false" />
   <property name="solution" value="${project.basedir}\LispIDEdotNet.sln"/>

@@ -36,6 +36,11 @@ namespace LispIDEdotNet.Components
             get { throw new NotImplementedException(); }
         }
 
+        protected virtual bool HandleEnter
+        {
+            get { return false; }
+        }
+
         protected int NextCommand
         {
             get
@@ -117,7 +122,7 @@ namespace LispIDEdotNet.Components
                         this.currCommand = this.history.Count;
                         OnBufferReady(EventArgs.Empty);
                         ClearBuffer();
-                        e.Handled = true;
+                        e.Handled = HandleEnter;
                     }
                     break;
                 case Keys.Up:
