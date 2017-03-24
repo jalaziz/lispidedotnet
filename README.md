@@ -13,4 +13,8 @@ A major update I'll be working on once I have more free time, includes porting t
 
 I'll update this page with more information and documentation once I have some free time.
 
-Note: For single instance functionality, I'm using a modified version of [Shy Agam's SingleInstancingIpc](http://www.codeproject.com/KB/threads/SingleInstancingWithIpc.aspx) that uses .Net 3.5 NamedPipes.
+**Note**: For single instance functionality, I'm using a modified version of [Shy Agam's SingleInstancingIpc](http://www.codeproject.com/KB/threads/SingleInstancingWithIpc.aspx) that uses .Net 3.5 NamedPipes.
+
+## Previous Releases
+
+You can find previous releases of this project at https://lispidedotnet.codeplex.com/.
