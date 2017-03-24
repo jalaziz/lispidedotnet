@@ -1,5 +1,8 @@
 # Description
 
+A .Net version of Niek's LispIDE (www.daansystems.com) with added features.
+This project uses ScintillaNet and Weifen Luo's DockPanel Suite.
+
 This project was created for my AI class at UCLA. I was frustrated with available editors and wanted something that was simple yet fully functional.
 
 I'll be adding several functionality improvements with time and as they are requested. If you'd like to contribute to this project in any way, please let me know.
